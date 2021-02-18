@@ -10,9 +10,8 @@ install_github("jmclawson/gramda")
 ```
 
 ## Use
-Once installation is complete, the following two lines will get you going with one of the tutorials:
+Once installation is complete, the following line will get you going with one of the tutorials:
 
 ```{r}
-library(gramda)
-lesson()
+gramda::lesson()
 ```
