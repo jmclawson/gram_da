@@ -1,0 +1,31 @@
+Package: gramda
+Type: Package
+Title: Lessons and data for DA course at Grambling
+Version: 0.1.0
+Authors@R: person("James", "Clawson", 
+                  email = "clawson@gmail.com",
+                  role = c("aut", "cre"))
+Description: This package collects lessons and 
+    data sets for use in introductory R courses at
+    Grambling. Some data sets were created for the
+    course and others compiled from elsewhere and 
+    then modified.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    learnr,
+    scales,
+    tidyverse,
+    gradethis (>= 0.1.0.9004)
+Suggests: 
+    dplyr, 
+    ggplot2, 
+    tibble,
+    robotstxt,
+    rvest,
+    DT,
+    tidymodels,
+    fivethirtyeight
+Depends: 
+    R (>= 2.10)
