@@ -1,4 +1,5 @@
 library(dplyr)
+library(tibble)
 
 lesson <- function() {
   the.lessons <- c("01-basics")
