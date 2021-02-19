@@ -14,8 +14,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    dplyr,
-    tibble,
     learnr,
     scales,
     tidyverse,
@@ -28,4 +26,7 @@ Suggests:
     tidymodels,
     fivethirtyeight
 Depends: 
+    dplyr,
+    tibble,
     R (>= 2.10)
+RoxygenNote: 7.1.1

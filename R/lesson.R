@@ -1,6 +1,9 @@
-library(dplyr)
 library(tibble)
-
+library(dplyr)
+#' Start a lesson from the gramda package.
+#'
+#' @return A list of available lessons
+#' @examples lesson()
 lesson <- function() {
   the.lessons <- c("01-basics")
 
