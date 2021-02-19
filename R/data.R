@@ -14,6 +14,6 @@
 #'   \item{Opponent.Score}{score earned by players in Opponent column}
 #'   \item{Attendance}{number of attendees}
 #' }
-#' @source Some details were compiled from multiple websites that are no longer
+#' @source Some details were compiled from sources that are no longer available online.
 #' @source \url{https://swac.org/stats.aspx?path=football&year=2019}
 "swac"
