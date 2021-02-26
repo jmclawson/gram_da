@@ -19,7 +19,7 @@ A data frame with 113 rows and 9 variables:
 }
 }
 \source{
-Some details were compiled from multiple websites that are no longer
+Some details were compiled from sources that are no longer available online.
 
 \url{https://swac.org/stats.aspx?path=football&year=2019}
 }

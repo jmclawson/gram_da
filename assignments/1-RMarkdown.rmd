@@ -1,0 +1,32 @@
+---
+title: "Hello, R Markdown!"
+author: "J. Doe"
+date: "2/24/2021"
+output: word_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring documents. The file starts with some specially formatted metadata in the header. After that, basic text is easy to add to an R Markdown document. Add formatting by using some special characters.
+
+## This is a level-two header
+
+### This is a level-three header
+
+And text can be indicated as *italics* or **bold** by using asterisks.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+2 + 2
+```
+
+## Is that all?
+
+We'll get used to using R Markdown over the course of the semester, but it's really as simple as it seems. If you have less-simple questions about R Markdown, you can learn more about it [online](http://rmarkdown.rstudio.com) or by [asking Dr. Clawson](mailto://clawsonj@gram.edu?subject=RMarkdown).
+
+## Your first assignment
+
+Add a few sentences at the end of this R Markdown document to tell me your initial thoughts about this unit. *Are you scared/excited? Why? What do you hope to learn?* After that, scroll to the top of the page, change the "Author" name to your name, and update the "Date" if needed. Click the "Knit" button in the toolbar right above that, and submit the resulting Microsoft Word document on Canvas.
+
+## "My first thoughts about this unit..."
+
+(insert a few sentences here)

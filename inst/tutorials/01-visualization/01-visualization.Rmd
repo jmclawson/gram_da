@@ -1,8 +1,8 @@
 ---
-title: "Lesson 1: Visualizing Data"
+title: "Lesson 1: Data Visualization in R"
 output: 
   learnr::tutorial:
-    progressive: false
+    progressive: true
 runtime: shiny_prerendered
 description: >
   Get started in R by using it to visualize 
@@ -13,149 +13,104 @@ description: >
 ```{r setup, include=FALSE}
 library(learnr)
 library(gradethis)
+library(tidyverse)
+library(gramda)
 
 gradethis_setup()
 
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## 1. Introduction
 
-## 1. Getting started
+This interactive tutorial will introduce you to some basics of visualizing data in R. You'll see some blocks of code that allow you to modify them and see the results. This code is the same you would use outside of the tutorial, whether working in R Studio's Console or when using the Source pane to write an R script or an R Markdown document. For the sake of this tutorial, please make sure you've completed material explained in previous lessons on Canvas and on YouTube, including installing the `tidyverse` package.
 
-Throughout these lessons, you'll see some blocks of code that allow you to modify them 
+The work flow of this lesson is based on chapter 1 of [*R for Data Science*](https://r4ds.had.co.nz), by Hadley Wickham and Garrett Grolemund.
 
-### 1.1 Exercises
+## 2. Getting started
 
-#### 1. Add two plus two. 
+The first thing we'll need to do in almost any analysis is to load the necessary packages. For this lesson, we'll be using the `tidyverse` package and the `gramda` package. (Both of these should already have been installed in the first class.) In the code block below, fill in the missing blank to load both packages using the `library()` command. When you think you have it, click the "Run Code" button, and then check your work by clicking "Submit Answer."
 
-In the box below, try it out by adding two and two. If you need some help, check the "Hints," and when you think you've got it, click the "Run Code" button. Finally, submit your answer for verification by clicking "Submit Answer."
-
-```{r two-plus-two, exercise=TRUE}
-
+```{r libraries, exercise=TRUE}
+library(tidyverse)
+library(___)
 ```
 
-```{r two-plus-two-solution}
-2 + 2
+```{r libraries-solution}
+library(tidyverse)
+library(gramda)
 ```
 
-```{r two-plus-two-check}
+```{r libraries-check}
 grade_this_code()
 ```
 
-#### 2. Divide ten by three.
+## 3. Solve a Problem by Visualizing Data
 
-Don't stop now! Show you still have the magic in the box below.
+For the first graph we create, we're going to look at Grambling's 2019 football season in comparison with other universities in our athletic conference, SWAC. We're going to use this data to try to answer the question, "**Do teams score more points when playing at home than when they play an away game?**" The `gramda` package provides the data we need in the data frame called `swac`. In this **data frame**, every row represents a game (an *observation*), and every column represents some feature of that game (a *variable*).
 
-```{r ten-divide-three, exercise=TRUE}
+### 3.1 Look at the data
+
+Type the name `swac` in the code block below to see what these rows and columns look like.
+
+```{r swac, exercise=TRUE}
 
 ```
 
-```{r ten-divide-three-solution}
-10 / 3
+```{r swac-solution}
+swac
 ```
 
-```{r ten-divide-three-check}
+```{r swac-check}
 grade_this_code()
 ```
 
-## 2. Assigning names to values
+Although the data frame has many columns and rows, it's showing you only a small number of them on the screen to make things manageable. The bottom left of the table shows you the actual dimensions of the table. How many rows and columns are there?
 
-In addition to basic arithmetic, R also allows you to save certain values to named objects. This can be handy for storing something in memory you can come back to later.
+At the top of each column, the column name identifies the variable it represents. As you can see, the each SWAC team's schedule is represented in the `Team` column, while their opponents are listed in the `Opponents` column. This means that some of the games are listed twice, when the opponent is also a SWAC university.
 
-In R, the assignment operator looks like this: `<-`
+Among the variables in `swac` are two we're going to be paying attention to:
 
-Here's an example of it in action. Since an object's name can be almost anything, it's helpful to give it a name that's meaningful. Here, I'm assigning the value `4` to the name `legs` because that's how many legs a dog has.
+1.  `Team.Score` shows the score earned by a SWAC team in the game.
+2.  `Location` indicates whether the game was a "Home" or "Away" game.
 
-```{r assignment-legs, echo=TRUE}
-legs <- 4
+As with many objects in R, you can learn more about `swac` by opening its help page. Add a `?` before any command to learn more about it; in this case, you can type `?swac`.
+
+### 3.2 Create a ggplot
+
+Run this code to put `Location` on the x-axis and `Team.Score` on the y-axis.
+
+```{r gg1, exercise=TRUE}
+ggplot(data = swac) + 
+  geom_boxplot(mapping = aes(x = Location, y = Team.Score))
 ```
 
-This arrow is made up of the lesser-than sign and a minus sign, typed right next to each other. Keep in mind that it should be pointed left. When an object is named like this, we don't get any verification that it's happened, but we can check it by typing the name of the object to see the result:
+This **box plot** shows the distribution of scores for each kind of game, Home and Away. The boundaries of the box shows the middle 50% of scores, and the outer lines or "whiskers" extend to the maximum and minimum scores to show the top and bottom 25%. The heavy middle line shows the median score a team earned---i.e., the middlemost score of the group.
 
-```{r check-legs, echo=TRUE}
-legs
+The visualization shows that SWAC teams typically scored below 30 points in away games, while they scored almost 35 points in home games. With this information, we can answer the question originally posed: **Teams in our conference seem to play better when playing in front of a home audience.**
+
+### 3.3 Understanding ggplot's options
+
+Whenever we use the the `ggplot()` function to make a chart, it will have a few common characteristics:
+
+1.  The data frame we're using should be identified---see `data = swac` in the box plot above and `<DATA>` in the block below.
+2.  The type of the chart is indicated using a command starting with "geom\_"---see `geom_boxplot` in the above example and `<CHART.TYPE>` below.
+3.  The dimensions for x-axis, y-axis, and other things will be indicated as different aesthetic mappings, relating columns to visual elements---see `mapping = aes(x = Location, y = Team.Score)` above and `<DIMENSIONS>` below.
+
+```{r gg-understand, eval=FALSE, echo=TRUE}
+ggplot(data = <DATA>) + 
+  geom_<CHART.TYPE>(mapping = aes(<DIMENSIONS>))
 ```
 
-### 2.1 Exercises 
+## 4. Checkpoint Quiz (No pressure!)
 
-#### 1. Assign a value to an object
+Now's your chance to double check your understanding so far. To serve as a kind of "scratch paper" for you to check things out, this code block will let you try out the code you think you might need:
 
-Now you try it. In the code block below, fill in the blanks to assign the `4` to the name `legs` and the value `42` to the variable `dogs` (because that's how many dogs we apparently have).
-
-```{r assignment-dogs, exercise=TRUE}
-legs <- 4
-___ ___ 42
-```
-
-```{r assignment-dogs-hint-1}
-legs <- 4
-dogs ___ 42
-```
-
-```{r assignment-dogs-solution}
-legs <- 4
-dogs <- 42
-```
-
-```{r assignment-dogs-check}
-grade_this_code()
-```
-
-#### 2. Use objects in math
-
-These named objects become most especially useful when we treat them as if they are the values themselves. Try multiplying `dogs` times `legs` in the exercise below to see how many total legs we have in our menagerie. (Remember, `legs` has the value of `4`, and `dogs` is equal to `42`.)
-
-```{r dogs-by-legs, exercise=TRUE, exercise.setup = "assignment-dogs-solution"}
+```{r checkpoint1, exercise=TRUE}
 
 ```
 
-```{r dogs-by-legs-hint-1}
-___ * ___
-```
-
-```{r dogs-by-legs-hint-2}
-dogs * ___
-```
-
-```{r dogs-by-legs-solution, exercise.reveal_solution = FALSE}
-dogs <- 42
-legs <- 4
-dogs * legs
-```
-
-```{r dogs-by-legs-check}
-grade_this({
-  if(identical(.result, .solution)) {
-    pass("Correct, `dogs` times `legs` is the same as `42` times `4`--which is all just a roundabout way of saying `168`. You're really getting the hang of this!")
-  }
-  fail(random_encouragement())
-})
-```
-
-## Using Vectors and Lists
-
-Everything we've done so far is possible to do on a calculator with a memory function. R also lets us group a series of numbers together into a list, called a "vector." In its simplest form, a vector is just a series of values separated by commas.
-
-
-### Exercise with Hint
-
-*Here's an exercise where the chunk is pre-evaluated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
-
-Modify the following code to limit the number of rows printed to 5:
-
-```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
-mtcars
-```
-
-```{r print-limit-hint}
-head(mtcars)
-```
-
-### Quiz
-
-*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
-
-Some questions to verify that you understand the purposes of various base and recommended R packages:
+These questions are just to let you see how well you understand things:
 
 ```{r quiz}
 quiz(
@@ -173,4 +128,3 @@ quiz(
   )
 )
 ```
-
