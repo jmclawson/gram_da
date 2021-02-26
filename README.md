@@ -41,11 +41,11 @@ Once the package is loaded, a few data sets are also made available:
 
 <dl>
 <dt>swac</dt>
-<dd>records of the 2019 football season among member institutions of the Southwestern Athletic Conference</dd>
+<dd>2019 football season records for member institutions of the Southwestern Athletic Conference</dd>
 
 <dt>bannerweb (coming soon)</dt>
 <dd>course schedules and class sizes from a recent semester</dd>
 
 <dt>sneaux21 (coming soon)</dt>
-<dd>Shreveport's hourly weather data for the week of February 12 through February 18, in the years of 2016 through 2021</dd>
+<dd>five years (2016-2018) of Shreveport's hourly weather data for the week of Feb. 12-18</dd>
 </dl>
