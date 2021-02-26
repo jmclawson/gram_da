@@ -5,7 +5,7 @@ library(dplyr)
 #' @return A list of available lessons
 #' @examples lesson()
 lesson <- function() {
-  the.lessons <- c("01-basics")
+  the.lessons <- learnr::available_tutorials("gramda")[[2]]
 
   print(learnr::available_tutorials("gramda"))
 

@@ -1,7 +1,7 @@
 Package: gramda
 Type: Package
 Title: Lessons and data for DA course at Grambling
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("James", "Clawson", 
                   email = "clawson@gmail.com",
                   role = c("aut", "cre"))
@@ -28,5 +28,5 @@ Suggests:
 Depends: 
     dplyr,
     tibble,
-    R (>= 2.10)
+    R (>= 3.5.0)
 RoxygenNote: 7.1.1
