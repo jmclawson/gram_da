@@ -16,7 +16,7 @@ remotes::install_github("rstudio-education/gradethis")
 remotes::install_github("jmclawson/gramda")
 ```
 
-When asked which versions of the packages you'd like to update, choose "1: All" or "2: CRAN packages only."
+When asked which versions of the packages you'd like to update, choose "1: All" or "2: CRAN packages only." If it asks you whether you'd like to install code that needs to be compiled, you're probably safe to say "no".
 
 ## Update
 
