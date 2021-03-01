@@ -50,7 +50,7 @@ grade_this_code()
 
 ### 2.1 Checkpoint
 
-platypus
+Occasionally during this lesson, you'll see a checkpoint question (or a few of them) to help reiterate something you've just learned. Don't get nervous, though; they're here just for you to check your own understanding.
 
 ```{r quiz-2}
 quiz(
