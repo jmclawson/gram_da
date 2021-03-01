@@ -1,0 +1,26 @@
+---
+title: "Comparing SWAC Travel Schedules"
+author: "J. Doe"
+date: "3/1/2021"
+output: word_document
+---
+
+For this assignment, fill out each of the remaining sections, adding text and code where necessary. As you write code, you can click the green "Run Current Chunk" arrow at the top-right of each code chunk to make sure things are working.
+
+When you're done, delete this assignment explanation (everything between line 7 and the header saying "1. Loading necessary packages"). Then, change the author name and the date at the top, use the "Knit" button on the toolbar, and submit the resulting Word document on Canvas.
+
+### Expectations
+
+1.  Load the `tidyverse` and `gramda` packages.
+2.  Use `geom_bar()` to visualize the number of "Home" and "Away" games, and then add `facet_wrap()` to differentiate by each "Team." Graphs made using `geom_bar()` need only one axis defined; the other will automatically default to a *count* of the number of elements in that group.
+3.  Consider the visualization you've created, and then write a few sentences to answer these questions: Which SWAC team(s) played more games at a home stadium than they played away? Which SWAC team(s) played the fewest number of games at home? What is the greatest number of away games any one team had to play in 2019?
+
+## 1. Load necessary packages
+
+```{r}
+
+```
+
+## 2. Make Visualization
+
+## 3. Describe the Data
