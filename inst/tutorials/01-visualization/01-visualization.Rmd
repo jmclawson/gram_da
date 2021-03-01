@@ -1,5 +1,6 @@
 ---
 title: "Lesson 1: Data Visualization in R"
+author: "James Clawson"
 output: 
   learnr::tutorial:
     progressive: true
@@ -23,13 +24,15 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## 1. Introduction
 
-This interactive tutorial will introduce you to some basics of visualizing data in R. You'll see some blocks of code that allow you to modify them and see the results. This code is the same you would use outside of the tutorial, whether working in R Studio's Console or when using the Source pane to write an R script or an R Markdown document. For the sake of this tutorial, please make sure you've completed material explained in previous lessons on Canvas and on YouTube, including installing the `tidyverse` package.
+This interactive tutorial will introduce you to some basics of visualizing data in R. In it, you'll occasionally see blocks of code that allow you to modify them and see the results. This code is the same you would use outside of the tutorial, whether working in R Studio's Console or when using the Source pane to write an R script or an R Markdown document. For the sake of this tutorial, please make sure you've completed material explained in previous lessons on Canvas and on YouTube, including installing the `tidyverse` package.
 
 The work flow of this lesson is based on chapter 1 of [*R for Data Science*](https://r4ds.had.co.nz), by Hadley Wickham and Garrett Grolemund.
 
 ## 2. Getting started
 
-The first thing we'll need to do in almost any analysis is to load the necessary packages. For this lesson, we'll be using the `tidyverse` package and the `gramda` package. (Both of these should already have been installed in the first class.) In the code block below, fill in the missing blank to load both packages using the `library()` command. When you think you have it, click the "Run Code" button, and then check your work by clicking "Submit Answer."
+The first thing we'll need to do in almost any analysis is to load the necessary packages. For this lesson, we'll be using the `tidyverse` package and the `gramda` package. Both of these are packages that students should have installed already.
+
+We use the `library()` command to load a package. In the code block below, use this function to load both packages, filling in the empty blank. Once you have it, click the "Run Code" button, and then check your work by clicking "Submit Answer."
 
 ```{r libraries, exercise=TRUE}
 library(tidyverse)
@@ -45,9 +48,26 @@ library(gramda)
 grade_this_code()
 ```
 
-## 3. Solve a Problem by Visualizing Data
+### 2.1 Checkpoint
 
-For the first graph we create, we're going to look at Grambling's 2019 football season in comparison with other universities in our athletic conference, SWAC. We're going to use this data to try to answer the question, "**Do teams score more points when playing at home than when they play an away game?**" The `gramda` package provides the data we need in the data frame called `swac`. In this **data frame**, every row represents a game (an *observation*), and every column represents some feature of that game (a *variable*).
+platypus
+
+```{r quiz-2}
+quiz(
+  question("What command do you use to load a package after you have already installed it?",
+    answer("`install.package()`"),
+    answer("`load.package()`"),
+    answer("`library()`", correct = TRUE),
+    answer("`swac`")
+  )
+)
+```
+
+## 3. Solving a Problem with Visualization
+
+For the first graph we create, we're going to look at Grambling's 2019 football season in comparison with other universities in our athletic conference, SWAC. We're going to use this data to try to answer the question, "**Do teams score more points when playing at home than when they play an away game?**"
+
+The `gramda` package provides the data we need in the data frame called `swac`. In this data frame, every row represents a game (an *observation*), and every column represents some feature of that game (a *variable*).
 
 ### 3.1 Look at the data
 
@@ -67,64 +87,359 @@ grade_this_code()
 
 Although the data frame has many columns and rows, it's showing you only a small number of them on the screen to make things manageable. The bottom left of the table shows you the actual dimensions of the table. How many rows and columns are there?
 
-At the top of each column, the column name identifies the variable it represents. As you can see, the each SWAC team's schedule is represented in the `Team` column, while their opponents are listed in the `Opponents` column. This means that some of the games are listed twice, when the opponent is also a SWAC university.
+At the top of each column, the column name identifies the variable it represents. As you can see, each SWAC team's schedule is represented in the `Team` column, while their opponents are listed in the `Opponent` column. This means that a game will be listed twice when the opponent is also a SWAC university.
 
-Among the variables in `swac` are two we're going to be paying attention to:
+Among the variables in `swac` are two we're going to be paying attention to first:
 
 1.  `Team.Score` shows the score earned by a SWAC team in the game.
 2.  `Location` indicates whether the game was a "Home" or "Away" game.
 
-As with many objects in R, you can learn more about `swac` by opening its help page. Add a `?` before any command to learn more about it; in this case, you can type `?swac`.
+As with many objects in R, you can learn more about `swac` by opening its help page. Add a `?` before any command to learn more about it; in this case, you can type `?swac` to learn more about this data set.
+
+```{r swac-2, exercise=TRUE}
+
+```
+
+```{r swac-2-solution}
+?swac
+```
+
+```{r swac-2-check}
+grade_this_code()
+```
 
 ### 3.2 Create a ggplot
 
-Run this code to put `Location` on the x-axis and `Team.Score` on the y-axis.
+Modify this code to put `Location` on the x-axis and `Team.Score` on the y-axis. In case you need a hint, the "Hints" button should help you out.
 
 ```{r gg1, exercise=TRUE}
+ggplot(data = swac) + 
+  geom_boxplot(mapping = aes(x = ___, y = ___))
+```
+
+```{r gg1-hint-1}
+ggplot(data = swac) + 
+  geom_boxplot(mapping = aes(x = Location, y = ___))
+```
+
+```{r gg1-solution}
 ggplot(data = swac) + 
   geom_boxplot(mapping = aes(x = Location, y = Team.Score))
 ```
 
-This **box plot** shows the distribution of scores for each kind of game, Home and Away. The boundaries of the box shows the middle 50% of scores, and the outer lines or "whiskers" extend to the maximum and minimum scores to show the top and bottom 25%. The heavy middle line shows the median score a team earned---i.e., the middlemost score of the group.
+```{r gg1-check}
+grade_this_code()
+```
 
-The visualization shows that SWAC teams typically scored below 30 points in away games, while they scored almost 35 points in home games. With this information, we can answer the question originally posed: **Teams in our conference seem to play better when playing in front of a home audience.**
+This **box plot** shows the distribution of scores for each kind of game, Home and Away. The boundaries of the box identify the middle 50% of scores, and the outer lines or "whiskers" extend to the maximum and minimum scores to show the top and bottom 25%. The heavy middle line shows the median score a team earned---i.e., the middlemost score of the group.
+
+The visualization shows that SWAC teams typically scored below 30 points in away games, while they scored almost 35 points in home games. With this information, we can answer the question originally posed: *Do teams typically score more points when playing at home than when playing an away game?*
+
+Yes, it seems they score more points at home games than they do when playing away.
 
 ### 3.3 Understanding ggplot's options
 
 Whenever we use the the `ggplot()` function to make a chart, it will have a few common characteristics:
 
-1.  The data frame we're using should be identified---see `data = swac` in the box plot above and `<DATA>` in the block below.
-2.  The type of the chart is indicated using a command starting with "geom\_"---see `geom_boxplot` in the above example and `<CHART.TYPE>` below.
-3.  The dimensions for x-axis, y-axis, and other things will be indicated as different aesthetic mappings, relating columns to visual elements---see `mapping = aes(x = Location, y = Team.Score)` above and `<DIMENSIONS>` below.
+1.  The data frame we're using should be identified, as in `data = swac` shown above.
+2.  The type of the chart is indicated using a command starting with "geom\_", like you can see in `geom_boxplot()` in the above example.
+3.  The dimensions for x-axis, y-axis, and other things will be indicated as different aesthetic mappings, relating columns to visual elements---e.g., `mapping = aes(x = Location, y = Team.Score)`.
 
-```{r gg-understand, eval=FALSE, echo=TRUE}
-ggplot(data = <DATA>) + 
-  geom_<CHART.TYPE>(mapping = aes(<DIMENSIONS>))
-```
+### 3.4. Checkpoint
 
-## 4. Checkpoint Quiz (No pressure!)
+Now's your chance to double check your understanding so far. Don't worry: there's no penalty for getting anything wrong.
 
-Now's your chance to double check your understanding so far. To serve as a kind of "scratch paper" for you to check things out, this code block will let you try out the code you think you might need:
-
-```{r checkpoint1, exercise=TRUE}
-
-```
-
-These questions are just to let you see how well you understand things:
-
-```{r quiz}
+```{r quiz-3}
 quiz(
-  question("Which package contains functions for installing other R packages?",
-    answer("base"),
-    answer("tools"),
-    answer("utils", correct = TRUE),
-    answer("codetools")
+  question("What's one quick way to view the contents of an object in R?",
+    answer("type the name of the object", correct = TRUE),
+    answer("type a question mark before the object's name"),
+    answer("Search the object on Google"),
+    answer("use ggplot to graph an object")
   ),
-  question("Which of the R packages listed below are used to create plots?",
-    answer("lattice", correct = TRUE),
-    answer("tools"),
-    answer("stats"),
-    answer("grid", correct = TRUE)
+  question("How many columns and rows are in the `swac` data frame?",
+    answer("9 rows and 113 columns",),
+    answer("113 rows and 9 columns", correct = TRUE),
+    answer("10 rows and 12 columns"),
+    answer("10 rows and 4 columns")
+  ),
+  question("Consider the visualization of Home and Away games, shown above. If you were going to rotate the chart onto its side, swapping the x-axis and the y-axis, which part of the code would you change?",
+    answer("`ggplot(data = swac)`",),
+    answer("`geom_boxplot()`"),
+    answer("`aes(x = Location, y = Team.Score)`", correct = TRUE)
   )
 )
 ```
+
+## 4. Revising a Question
+
+Suppose now we decide to answer a slightly different question, comparing teams' performances in their homecoming games compared to the rest of their seasons. **Do SWAC teams tend to do better in their homecoming games than they do during other games? Do teams win homecoming games more often than they win regular games?**
+
+### 4.1 Starting with a scatter plot
+
+To answer questions like this, we need to figure out which columns in the data frame are relevant. We have a column called `Homecoming` that will let us know the status of a game, but we don't have anything called `win or lose`. Instead, we're going to compare the `Team.Score` to the `Opponent.Score` to see which is higher.
+
+We used a box plot to compare categorical data, but a scatter plot is better suited for comparing two columns of numbers. To create a scatter plot, **change the code block below**, replacing the `geom_boxplot()` function with `geom_point()`. While you're at it, set the x-axis to `Opponent.Score` and the y-axis to `Team.Score`. Check your work with "Run Code"; when you think you have it right, click "Submit Answer.":
+
+```{r gg_point, exercise=TRUE}
+ggplot(data = swac) + 
+  geom_boxplot(mapping = aes(x = Location, y = Team.Score))
+```
+
+```{r gg_point-hint-1}
+ggplot(data = swac) + 
+  ___(mapping = aes(x = ___, y = ___))
+```
+
+```{r gg_point-hint-2}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = ___, y = ___))
+```
+
+```{r gg_point-hint-3}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, y = ___))
+```
+
+```{r gg_point-solution}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, y = Team.Score))
+```
+
+```{r gg_point-check}
+grade_this_code()
+```
+
+This scatter plot allows us to compare the team's score against the opponent's score for each game. Whenever a point has a higher number on the y-axis than it has on the x-axis, that means that the team won the game; conversely, when the point has a higher value on the x-axis, then the opponent won.
+
+### 4.2 Adding color
+
+Now that we've mapped two columns against the chart's axes, we're going to add a third column, showing which points belong to homecoming games. While prior mappings were for `x` and for `y`, this mapping is for `color`. Add a third mapping for `color`, and set it to the column `Homecoming`.
+
+```{r gg_color, exercise=TRUE}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, 
+                           y = Team.Score))
+```
+
+```{r gg_color-hint-1}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, 
+                           y = Team.Score,
+                           ___ = ___))
+```
+
+```{r gg_color-hint-2}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, 
+                           y = Team.Score,
+                           color = ___))
+```
+
+```{r gg_color-solution}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, 
+                           y = Team.Score,
+                           color = Homecoming))
+```
+
+```{r gg_color-check}
+grade_this_code()
+```
+
+When we add a mapping like color, we automatically get a legend describing what the colors stand for.
+
+What other dimensions might also work here? Would it make sense to change the `shape` of the points instead of the `color`? What happens when you define both `shape` and `color`? (Try it out!)
+
+### 4.3 Adding a line
+
+With patience and a magnifying glass, this could help us answer the question. But let's make the task easier. Adding a diagonal line at 45º would allow us to see at a glance which games have higher values in the `Team.Score` column and which have higher values in `Opponent.Score`. We add a line with the `geom_abline()` function; the only parameters we need to define are the appropriate values in `slope` and `intercept`. (Does this bring back memories from algebra?)
+
+Adding layers is as easy as using the plus sign. Run the below code to see the result.
+
+```{r gg_line, exercise = TRUE}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, 
+                           y = Team.Score,
+                           color = Homecoming,
+                           shape = Homecoming)) +
+  geom_abline(slope = 1, intercept = 0)
+```
+
+With this new line, it's easy to differentiate the *win*s (above the line) from the *loss*es (below the line). By considering the points that are near the line, we can even see which games were close. The chart can now reasonably get us the answers to our questions, but we might still wonder more details about the performance of each team. How do Grambling's 2019 football records compare with those of other universities in our conference? Can we see more detail?
+
+### 4.4 Comparing facets
+
+The `facet_wrap()` function lets us compare the points for each team. Add a new layer with this function; then, inside the parenthesis add a tilde (`~`) followed by the name of the variable you're comparing across (`Team`):
+
+```{r gg_facet, exercise = TRUE}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, 
+                           y = Team.Score,
+                           color = Homecoming,
+                           shape = Homecoming)) +
+  geom_abline(slope = 1, intercept = 0)
+```
+
+```{r gg_facet-hint-1}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, 
+                           y = Team.Score,
+                           color = Homecoming,
+                           shape = Homecoming)) +
+  geom_abline(slope = 1, intercept = 0) +
+  facet_wrap(~___)
+```
+
+```{r gg_facet-solution}
+ggplot(data = swac) + 
+  geom_point(mapping = aes(x = Opponent.Score, 
+                           y = Team.Score,
+                           color = Homecoming,
+                           shape = Homecoming)) +
+  geom_abline(slope = 1, intercept = 0) +
+  facet_wrap(~Team)
+```
+
+```{r gg_facet-check}
+grade_this_code()
+```
+
+The visualization suggests that teams are more likely to win their homecoming games than they are other games. Even in instances in which a team unfortunately lost the homecoming game, as in the case for Texas Southern, they managed to play one of the clsoest games of their season.
+
+### 4.5 Checkpoint
+
+```{r quiz-4}
+quiz(
+  question("What `geom` will result in a scatter plot?",
+    answer("`geom_boxplot()`"),
+    answer("`geom_point()`", correct = TRUE),
+    answer("`geom_abline()`"),
+    answer("`geom_histogram`")
+  ),
+  question("Which additional parameters do you need when adding a static line to a plot?",
+    answer("`alpha`"),
+    answer("`linetype`"),
+    answer("`slope`", correct = TRUE),
+    answer("`intersect`", correct = TRUE)
+  ),
+  question("Which of the following aesthetic mappings can you set against a column in the data set for a scatter plot? (Hint: It's okay to check!)",
+    answer("`x`", correct = TRUE),
+    answer("`y`", correct = TRUE),
+    answer("`color`", correct = TRUE),
+    answer("`shape`", correct = TRUE),
+    answer("`alpha`", correct = TRUE),
+    answer("`size`", correct = TRUE)
+  )
+)
+```
+
+## 5. Making it Look Good
+
+As you learn more about writing code in R, you'll also get better at learning tricks and steps for polishing a visualization. We don't want to cover too much at a time, so we've tried to keep things slow. Having said that, it can be nice to jump ahead for a moment to see the kind of visualization possible by employing some other features of R and by adding polish to a graph's labels and legend.
+
+### 5.1 Tweaking and Perfecting
+
+Using the data available in `swac`, the following code lays out the whole of Grambling's season, identifying dates when the games were played and whether Grambling won or lost, communicating the point breakdown and the name of the opposing school, recognizing the homecoming game, and differentiating games played in Grambling's home stadium or away. Additionally, the top of the chart sumamarizes one key takeaway for understanding the entire chart.
+
+```{r final, exercise=TRUE}
+swac %>%
+  filter(Team == "Grambling State") %>%
+  mutate(Opponent = Opponent %>% 
+           sub(pattern = "[ ][a-zA-Z]+$",
+               replacement = "",
+               x=.) %>%
+           gsub(pattern="Golden|Delta",
+                replacement = "",
+                x=.) %>%
+           gsub(pattern="Prairie View A&M",
+                replacement = "Prairie View",
+                x=.) %>%
+           gsub(pattern="^Southern",
+                replacement = "Southern       ",
+                x=.)) %>% 
+  ggplot(mapping = aes(y = Team.Score - Opponent.Score,
+                       x = as.Date(Date))) +
+  geom_abline(slope=0, intercept = 0) +
+  annotate("text", label="win",
+           fontface = "bold",
+           x=min(swac$Date), 
+           y=2.3, size = 5, hjust = 0.5) +
+  annotate("text", label="loss",
+           fontface = "bold",
+           x=min(swac$Date), 
+           y=-2.3, size = 5, hjust = 0.5) +
+  geom_line(color="gray", linetype=2) +
+  geom_label(aes(y = Team.Score - Opponent.Score - 4.4,
+                label = paste0("vs ", Opponent),
+                group = Date),
+            size = 3.65,
+            fontface = "italic",
+            fill="white",
+            color="white") +
+  geom_label(data = swac %>%
+               filter(Team == "Grambling State",
+                      Homecoming == TRUE),
+             aes(y = Team.Score - Opponent.Score - 7.8,
+                 group = Date),
+             label = "(homecoming)",
+             size = 3.65, color = "white", fill="white",
+             fontface = "italic") +
+  geom_text(aes(y = Team.Score - Opponent.Score - 4.4,
+                label = paste0("vs ", Opponent),
+                group = Date),
+            size = 3.65,
+            fontface = "italic") +
+  geom_text(aes(y = Team.Score - Opponent.Score - 7.8,
+                label = Homecoming %>%
+                  as.character() %>%
+                  gsub(pattern="TRUE",
+                       replacement="(homecoming)",
+                       x=.) %>%
+                  gsub(pattern="FALSE",
+                       replacement="",
+                       x=.),
+                group = Date),
+            size = 3.65, color = "red",
+            fontface = "italic") +
+  geom_label(aes(label = paste0(Team.Score, "-",
+                                Opponent.Score),
+                 fill = Location,
+                 group = Date,
+                 color = Location),
+             size = 4.7,
+             fontface = "bold") +
+  theme_linedraw() +
+  labs(y = "point spread",
+       x = "",
+       title = "After a slow start and a win streak, the 2019 season ended with a close game.",
+       color = "",
+       fill = "") +
+  scale_fill_manual(values = c("Away" = "black",
+                               "Home" = "goldenrod"),
+                    limits = c("Home", "Away"),
+                    labels = c("at Grambling", "Away")) +
+  scale_color_manual(values = c("Away" = "goldenrod",
+                                "Home" = "black"),
+                     limits = c("Home", "Away"),
+                     labels = c("at Grambling", "Away")) +
+  guides(fill = guide_legend(override.aes = aes(label = ""))) +
+  theme(legend.position = c(0.83, 0.07),
+        legend.direction = "horizontal",
+        plot.title.position = "plot",
+        legend.key = element_rect(colour = c("black",
+                                           "goldenrod"),
+                                  size = c(1,2))) +
+  scale_y_continuous(
+    labels = function(y) ifelse(y > 0,
+                                paste0("+", y),
+                                y))
+```
+
+Try changing anything in the above code to see what happens. You can always click "Start Over" to reset anything.
+
+### 5.2 Advanced Techniques
+
+Once you get a handle on the basics of data visualization, you can even go further to add elements like interactivity or animation. The code isn't included here because your computer is probably missing the necessary packages, and techniques such as these are beyond the scope of our class.
+
+![an animated data visualization showing football scores over time](https://jmclawson.net/cs112/pointspread.gif "Grambling's 2019 Football Season")

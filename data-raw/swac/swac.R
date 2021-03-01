@@ -69,8 +69,8 @@
 # save(swac, file = "data/swac.rda")
 #
 # #
-# # library(gganimate)
-# # library(gifski)
+# library(gganimate)
+# library(gifski)
 # #
 # # swac %>%
 # #   filter(Team == "Grambling State") %>%
@@ -140,111 +140,102 @@
 # #
 # # anim_save("gram2019.gif")
 # #
-# # animae2 <- swac %>%
-# #   filter(Team=="Grambling State") %>%
-# #   ggplot(mapping = aes(y = Team.Score - Opponent.Score,
-# #                        x = as.Date(Date))) +
-# #   geom_abline(slope=0, intercept = 0) +
-# #   annotate("text", label="win",
-# #            fontface = "bold",
-# #            x=min(swac$Date), y=2.3, size = 5, hjust = 0.5) +
-# #   annotate("text", label="loss",
-# #            fontface = "bold",
-# #            x=min(swac$Date), y=-2.3, size = 5, hjust = 0.5) +
-# #   geom_text(aes(label=Date %>% format("%m/%d"))) +
-# #   geom_line(color="gray", linetype=2) +
-# #   geom_label(aes(y = Team.Score - Opponent.Score-2.3,
-# #                 label = paste0("vs ", Opponent %>%
-# #                                  sub(pattern = "[ ][a-zA-Z]+$",
-# #                                      replacement = "",
-# #                                      x=.) %>%
-# #                                  gsub(pattern="Golden|Delta",
-# #                                       replacement = "",
-# #                                       x=.) %>%
-# #                                  gsub(pattern="Prairie View A&M",
-# #                                       replacement = "Prairie View",
-# #                                       x=.) %>%
-# #                                  gsub(pattern="^Southern",
-# #                                       replacement = "Southern       ",
-# #                                       x=.)),
-# #                 group = Date),
-# #             size = 3.65,
-# #             fontface = "italic",
-# #             fill="white",
-# #             color="white") +
-# #   geom_label(data = swac %>%
-# #                filter(Team == "Grambling State",
-# #                       Homecoming == TRUE),
-# #              aes(y = Team.Score - Opponent.Score - 3.9,
-# #                  group = Date),
-# #              label = "(homecoming)",
-# #              size = 3.65, color = "white", fill="white",
-# #              fontface = "italic") +
-# #   geom_text(aes(y = Team.Score - Opponent.Score-2.3,
-# #                 label = paste0("vs ", Opponent %>%
-# #                                  sub(pattern = "[ ][a-zA-Z]+$",
-# #                                      replacement = "",
-# #                                      x=.) %>%
-# #                                  gsub(pattern="Golden|Delta",
-# #                                       replacement = "",
-# #                                       x=.) %>%
-# #                                  gsub(pattern="Prairie View A&M",
-# #                                       replacement = "Prairie View",
-# #                                       x=.) %>%
-# #                                  gsub(pattern="^Southern",
-# #                                       replacement = "Southern       ",
-# #                                       x=.)),
-# #                 group = Date),
-# #             size = 3.65,
-# #             fontface = "italic") +
-# #   geom_text(aes(y = Team.Score - Opponent.Score-3.9,
-# #                 label = Homecoming %>%
-# #                   as.character() %>%
-# #                   gsub(pattern="TRUE",
-# #                        replacement="(homecoming)",
-# #                        x=.) %>%
-# #                   gsub(pattern="FALSE",
-# #                        replacement="",
-# #                        x=.),
-# #                 group = Date),
-# #             size = 3.65, color = "red",
-# #             fontface = "italic") +
-# #   geom_label(aes(label = paste0(Team.Score, "-",
-# #                                 Opponent.Score),
-# #                  fill = Location,
-# #                  group = Date,
-# #                  color = Location),
-# #              size = 4.7,
-# #              fontface = "bold") +
-# #   theme_linedraw() +
-# #   labs(y="point spread",
-# #        x="",
-# #        title="After a slow start and a win streak, the 2019 season ended with a close game.",
-# #        # subtitle="Date: {format(frame_along,'%b %d, %Y')}",
-# #        color="",
-# #        fill="") +
-# #   # transition_reveal(along = Date) +
-# #   scale_fill_manual(values = c("Away"="black", "Home"="goldenrod"),
-# #                     limits = c("Home", "Away"),
-# #                     labels = c("at Grambling", "Away")) +
-# #   scale_color_manual(values = c("Away"="goldenrod", "Home"="black"),
-# #                      limits = c("Home", "Away"),
-# #                      labels = c("at Grambling", "Away")) +
-# #   # scale_discrete_manual(labels = c("Away", "at Grambling")) +
-# #   guides(fill = guide_legend(override.aes = aes(label = ""))) +
-# #   theme(legend.position = c(0.84, 0.04),
-# #         legend.direction = "horizontal",
-# #         plot.title.position = "plot",
-# #         legend.key = element_rect(colour=c("black",
-# #                                            "goldenrod"),
-# #                                   size=c(1,2))) +
-# #   scale_y_continuous(
-# #     labels = function(y) ifelse(y > 0,
-# #                                 paste0("+", y),
-# #                                 y))
-# #
-# # animae3 <- animae2 + transition_reveal(along = Date)
-# #
-# # animate(animae3, end_pause = 30, rewind = FALSE)
-# #
-# # anim_save("pointspread.gif")
+# animae2 <- swac %>%
+#   filter(Team=="Grambling State") %>%
+#   mutate(Opponent = Opponent %>%
+#            sub(pattern = "[ ][a-zA-Z]+$",
+#                replacement = "",
+#                x=.) %>%
+#            gsub(pattern="Golden|Delta",
+#                 replacement = "",
+#                 x=.) %>%
+#            gsub(pattern="Prairie View A&M",
+#                 replacement = "Prairie View",
+#                 x=.) %>%
+#            gsub(pattern="^Southern",
+#                 replacement = "Southern     ",
+#                 x=.)) %>%
+#   ggplot(mapping = aes(y = Team.Score - Opponent.Score,
+#                        x = as.Date(Date))) +
+#   geom_abline(slope=0, intercept = 0) +
+#   ggplot2::annotate("text", label="win",
+#            fontface = "bold",
+#            x=min(swac$Date), y=2.3, size = 5, hjust = 0.5) +
+#   ggplot2::annotate("text", label="loss",
+#            fontface = "bold",
+#            x=min(swac$Date), y=-2.3, size = 5, hjust = 0.5) +
+#   geom_text(aes(label=Date %>% format("%m/%d"))) +
+#   geom_line(color="gray", linetype=2) +
+#   geom_label(aes(y = Team.Score - Opponent.Score-2.7,
+#                 label = paste0("vs ", Opponent),
+#                 group = Date),
+#             size = 3.65,
+#             fontface = "italic",
+#             fill="white",
+#             color="white") +
+#   geom_label(data = swac %>%
+#                filter(Team == "Grambling State",
+#                       Homecoming == TRUE),
+#              aes(y = Team.Score - Opponent.Score - 4.5,
+#                  group = Date),
+#              label = "(homecoming)",
+#              size = 3.65, color = "white", fill="white",
+#              fontface = "italic") +
+#   geom_text(aes(y = Team.Score - Opponent.Score-2.7,
+#                 label = paste0("vs ", Opponent),
+#                 group = Date),
+#             size = 3.65,
+#             fontface = "italic") +
+#   geom_text(aes(y = Team.Score - Opponent.Score-4.5,
+#                 label = Homecoming %>%
+#                   as.character() %>%
+#                   gsub(pattern="TRUE",
+#                        replacement="(homecoming)",
+#                        x=.) %>%
+#                   gsub(pattern="FALSE",
+#                        replacement="",
+#                        x=.),
+#                 group = Date),
+#             size = 3.65, color = "red",
+#             fontface = "italic") +
+#   geom_label(aes(label = paste0(Team.Score, "-",
+#                                 Opponent.Score),
+#                  fill = Location,
+#                  group = Date,
+#                  color = Location),
+#              size = 4.7,
+#              fontface = "bold") +
+#   theme_linedraw() +
+#   labs(y="point spread",
+#        x="",
+#        title="After a slow start and a win streak, Grambling's 2019 season ended in a close loss at the Bayou Classic.",
+#        # subtitle="Date: {format(frame_along,'%b %d, %Y')}",
+#        color="",
+#        fill="") +
+#   # transition_reveal(along = Date) +
+#   scale_fill_manual(values = c("Away"="black", "Home"="goldenrod"),
+#                     limits = c("Home", "Away"),
+#                     labels = c("at Grambling", "Away")) +
+#   scale_color_manual(values = c("Away"="goldenrod", "Home"="black"),
+#                      limits = c("Home", "Away"),
+#                      labels = c("at Grambling", "Away")) +
+#   # scale_discrete_manual(labels = c("Away", "at Grambling")) +
+#   guides(fill = guide_legend(override.aes = aes(label = ""))) +
+#   theme(legend.position = c(0.86, 0.04),
+#         legend.direction = "horizontal",
+#         plot.title.position = "plot",
+#         legend.key = element_rect(colour=c("black",
+#                                            "goldenrod"),
+#                                   size=c(1,2))) +
+#   scale_y_continuous(
+#     labels = function(y) ifelse(y > 0,
+#                                 paste0("+", y),
+#                                 y))
+#
+# animae3 <- animae2 + transition_reveal(along = Date)
+#
+# animate(animae3, end_pause = 30, rewind = FALSE,
+#         height=6, width=8.6, units="in",
+#         res=72)
+# # #
+# anim_save("pointspread.gif")
