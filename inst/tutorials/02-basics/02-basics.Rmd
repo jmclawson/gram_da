@@ -75,7 +75,7 @@ grade_this_code()
 
 ### 1.3 Trying other things
 
-There are other mathematical operators not mentioned here. Try running the following code. What role are being played by the circumflex character (or "hat", `^`)? Are the parentheses working as you'd expect them to work?
+There are other mathematical operators not mentioned here. Try running the following code. What roles are being played by the circumflex character (or "hat", `^`)? Are the parentheses working as you'd expect them to work?
 
 ```{r extra_math, exercise=TRUE}
 64^(1/3)
