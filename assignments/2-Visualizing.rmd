@@ -15,12 +15,12 @@ When you're done, delete this assignment explanation (everything between line 7 
 2.  Use `geom_bar()` to visualize the number of "Home" and "Away" games, and then add `facet_wrap()` to differentiate by each "Team." Graphs made using `geom_bar()` need only one axis defined; the other will automatically default to a *count* of the number of elements in that group.
 3.  Consider the visualization you've created, and then write a few sentences to answer these questions: Which SWAC team(s) played more games at a home stadium than they played away? Which SWAC team(s) played the fewest number of games at home? What is the greatest number of away games any one team had to play in 2019?
 
-## 1. Load necessary packages
+## 1. Load necessary packages (2 points)
 
 ```{r}
 
 ```
 
-## 2. Make Visualization
+## 2. Make Visualization (4 points)
 
-## 3. Describe the Data
+## 3. Describe the Data (4 points)

@@ -1,0 +1,391 @@
+---
+title: "Lesson 2: Some of the Basics"
+output: 
+  learnr::tutorial:
+    progressive: false
+runtime: shiny_prerendered
+description: >
+  Gain familiarity with R by playing with some 
+  basic operations: arithmetic, named objects, 
+  vectors.
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+
+gradethis_setup()
+
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## 1. Doing basic arithmetic
+
+Basic math functions are easy in R. Use the normal operators you're used to when writing out math problems, e.g. `+`, `-`, `*`, and `/`. These last two might look unusual, but they're for multiplication and division.
+
+### 1.1 Adding things up
+
+In the box below, try it out by *adding two and two*. If you need some help, check the "Hints," and when you think you've got it, click the "Run Code" button. Finally, submit your answer for verification by clicking "Submit Answer."
+
+```{r two-plus-two, exercise=TRUE}
+
+```
+
+```{r two-plus-two-hint-1}
+___ + ___
+```
+
+```{r two-plus-two-hint-2}
+2 + ___
+```
+
+
+```{r two-plus-two-solution}
+2 + 2
+```
+
+```{r two-plus-two-check}
+grade_this_code()
+```
+
+### 1.2 Dividing things up
+
+Don't stop now! Show you still have the magic in the box below by *dividing ten by 3*.
+
+```{r ten-divide-three, exercise=TRUE}
+
+```
+
+```{r ten-divide-three-hint-1}
+___ / ___
+```
+
+```{r ten-divide-three-hint-2}
+10 / ___
+```
+
+```{r ten-divide-three-solution}
+10 / 3
+```
+
+```{r ten-divide-three-check}
+grade_this_code()
+```
+
+### 1.3 Trying other things
+
+There are other mathematical operators not mentioned here. Try running the following code. What role are being played by the circumflex character (or "hat", `^`)? Are the parentheses working as you'd expect them to work?
+
+```{r extra_math, exercise=TRUE}
+64^(1/3)
+```
+
+
+## 2. Assigning names to values
+
+In addition to basic arithmetic, R also allows you to save certain values to named objects. This can be handy for storing something in memory you can come back to later.
+
+In R, the assignment operator looks like this: `<-`
+
+This arrow is made up of the lesser-than sign and a minus sign, typed next to each other. (Keep in mind that this arrow points left.) 
+
+Here's an example of it in action. Since an object's name can be almost anything, it's helpful to give it a name that's meaningful. Here, I'm assigning the value `4` to the name `legs` because that's how many legs a dog has.
+
+```{r assignment-legs, echo=TRUE}
+legs <- 4
+```
+
+When an object is named like this, we don't get any verification that it's happened, but we can check it by typing the name of the object to see the result:
+
+```{r check-legs, echo=TRUE}
+legs
+```
+
+### 2.1 Name your values 
+
+Now you try it. In the code block below, fill in the blanks to assign the `4` to the name `legs` and the value `42` to the variable `dogs` (because that's how many dogs we apparently have).
+
+```{r assignment-dogs, exercise=TRUE}
+legs <- 4
+___ ___ 42
+```
+
+```{r assignment-dogs-hint-1}
+legs <- 4
+dogs ___ 42
+```
+
+```{r assignment-dogs-solution}
+legs <- 4
+dogs <- 42
+```
+
+```{r assignment-dogs-check}
+grade_this_code()
+```
+
+### 2.2 Use objects as variables
+
+These named objects become most especially useful when we treat them as if they are the values themselves. Try multiplying `dogs` times `legs` in the exercise below to see how many total legs we have in our menagerie. (Remember, `legs` has the value of `4`, and `dogs` is equal to `42`.)
+
+```{r dogs-by-legs, exercise=TRUE, exercise.setup = "assignment-dogs-solution"}
+
+```
+
+```{r dogs-by-legs-hint-1}
+___ * ___
+```
+
+```{r dogs-by-legs-hint-2}
+dogs * ___
+```
+
+```{r dogs-by-legs-hint-3}
+dogs * legs
+```
+
+```{r dogs-by-legs-solution, exercise.reveal_solution = FALSE}
+dogs <- 42
+legs <- 4
+dogs * legs
+```
+
+```{r dogs-by-legs-check}
+grade_this({
+  if(identical(.result, .solution)) {
+    pass("Correct, `dogs` times `legs` is the same as `42` times `4`--which is all just a roundabout way of saying `168`. You're really getting the hang of this!")
+  }
+  fail(random_encouragement())
+})
+```
+
+### 2.3 Checkpoint
+
+Now's your chance to double check your understanding so far. Don't worry: there's no penalty for getting anything wrong.
+
+```{r quiz}
+quiz(
+  question("Which of the following shows the mathematic function 'two times three'?",
+    answer("2 + 3"),
+    answer("2 - 3"),
+    answer("2 * 3", correct = TRUE),
+    answer("2 / 3")
+  ),
+  question("Which of these operators is used for the assignment of a value to a name?",
+    answer("<-", correct = TRUE),
+    answer("%in%"),
+    answer("%%"),
+    answer("!=")
+  )
+)
+```
+
+## 3. Using vectors for lists of values
+
+Everything we've done so far is possible to do on a calculator with a memory function. R also lets us group a series of numbers together into a list, called a "vector." In its simplest form, a vector is just a series of values separated by commas and combined using the `c()` function:
+
+```{r temperature_vectors, exercise=TRUE}
+daily_highs <- c(63, 71, 63, 64, 67, 70, 75, 78)
+daily_lows <- c(38, 47, 46, 40, 39, 47, 59, 63)
+```
+
+Just as with objects we've named before, we can get the value of an object by typing it. See what high temperatures are waiting for us in the next week by typing `daily_highs` below:
+
+```{r print_vectors, exercise.setup="temperature_vectors", exercise=TRUE}
+
+```
+
+Although they look a little complex, vectors mostly work the same way as the other objects we've looked at. For instance, in the same way we multipled `legs * dogs` before, it's possible to do arithmetic using vectors here, too. We can convert a vector of Fahrenheit to a vector of Celsius in one go like this:
+
+```{r celsius_vectors, exercise.setup="temperature_vectors", exercise=TRUE}
+(daily_highs - 32) * 5/9
+```
+
+The above code block iterates along every item in the vector to apply the standard conversion to each of the termperatures we have in the vector.
+
+If we try arithmetic using two functions that have the same length, the code will pair up the first item in each list, the second item in each list, etc. For instance, you can find out which day will have the widest span of temperatures by subtracting the `daily_lows` from `daily_highs` in the code chunk below:
+
+```{r subtract-vectors, exercise.setup="temperature_vectors", exercise=TRUE}
+
+```
+
+```{r subtract-vectors-hint-1}
+___ - ___
+```
+
+```{r subtract-vectors-hint-2}
+daily_highs - ___
+```
+
+```{r subtract-vectors-solution}
+daily_highs - daily_lows
+```
+
+```{r subtract-vectors-check}
+grade_this_code()
+```
+
+With temperatures ranging from an expected low of 39ºF to a high of 67ºF, the fifth day in our list shows a span of 28º---the widest range of temperatures. Wear layers!
+
+## 4. Useful functions 
+
+We've already learned that objects are anything with a name. When we write, for instance, `legs <- 4`, we are creating an object called `legs` which has the value `4`. And we know, too, from the process of installing packages, that some named objects are functions, differentiated by the use of parenthesis. 
+
+Commonly, the parentheses has information inside it. When we typed `install.packages("tidyverse")`, we were telling R to go out and find the package named inside the parentheses, to download that package, and to install all the necessary files on the computer. When we type `library(tidyverse)` to load the package, we tell R to use the function called `library()` to load the package `tidyverse`---and for both of these, we need to make sure we know whether to use quotation marks or not. (It's up to the function to describe what it's looking for there!) 
+
+When when we use the `gramda` package to run these tutorials, we use the function called `lesson()` to choose from a list. In this case, the function doesn't expect anything inside the parentheses because the person who wrote that function—*that's me!*—didn't have need for extra settings.
+
+On the other end of the scale, we've seen from `ggplot` that parentheses will often expect multiple pieces of information inside them, separated by commas. When we write `aes(x = Location, y = Team.Score)` we're defining two extra pieces of information that change how that function works. Likewise, when we write `daily_highs <- c(64, 71, 63, 64, 67, 70, 75, 78)`, we're also using a function `c()` to *do something* with a list of seven pieces of information, all separated by commas.
+
+Functions are useful because of what they allow us to do with the information we give to them.
+
+### 4.1 Summary statistics
+
+#### Average
+
+Let's start with the list of daily high temperatures we looked at above. A function makes it easy to discover the average temperature or *mean* of a range of numbers. Use the `mean()` function to find the average of `daily_highs` in the following code block. (Hint: the name of the object goes inside the parentheses.)
+
+```{r function_mean, exercise.setup="temperature_vectors", exercise=TRUE}
+
+```
+
+```{r function_mean-solution}
+mean(daily_highs)
+```
+
+```{r function_mean-check}
+grade_this_code()
+```
+
+
+#### Sum
+
+I'm not sure why we'd want to do so, but we could also add up all the temperatures using the `sum()` function. Try it out below:
+
+```{r function_sum, exercise.setup="temperature_vectors", exercise=TRUE}
+
+```
+
+```{r function_sum-solution}
+sum(daily_highs)
+```
+
+```{r function_sum-check}
+grade_this_code()
+```
+
+#### Standard deviation
+
+All of the above functions are pretty easy to do with a calculator, but R also makes it simple to find more complex statistical measurements, like standard deviation. Try it out below, using the `sd()` function on `daily_highs`:
+
+```{r function_sd, exercise.setup="temperature_vectors", exercise=TRUE}
+
+```
+
+```{r function_sd-solution}
+sd(daily_highs)
+```
+
+```{r function_sd-check}
+grade_this_code()
+```
+
+#### The list goes on...
+
+Try out any of the following in the code block below. Which do you think will be most useful? Do any of them seem pointless or confusing?
+
+<table>
+<tr>
+<th style="vertical-align: top;">`mean()`</th>
+<td>Find the average of a vector of numbers
+<p>Example: `mean(c(1,2,3,40,41))` is `17.4`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`median()`</th>
+<td>Find the middle value of a vector of numbers
+<p>Example: `mean(c(1,2,3,40,41))` is `3`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`sum()`</th>
+<td>Add up a vector of numbers
+<p>Example: `sum(c(1,2,3,40,41))` is `87`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`sd()`</th>
+<td>Find the standard deviation of a vector of numbers
+<p>Example: `sd(c(1,2,3,40,41))` is `21.10213`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`min()`</th>
+<td>Find the minimum value in a vector of numbers
+<p>Example: `min(c(1,2,3,40,41))` is `1`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`max()`</th>
+<td>Find the maximum value in a vector of numbers
+<p>Example: `max(c(1,2,3,40,41))` is `41`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`range()`</th>
+<td>Find the range of a vector of numbers
+<p>Example: `range(c(1,2,3,40,41))` is `1 41` </p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`length()`</th>
+<td>Count the number of items in any vector
+<p>Example: `length(c(1,2,3,40,41))` is `5`<br>
+Example: `length(c("dog","cat","pony"))` is `3`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`sort()`</th>
+<td>Put any vector in order, either numerically or alphabetically
+<p>Example: `sort(c(1,2,3,40,41))` is `1 2 3 40 41`<br>
+Example: `sort(c("dog","cat","pony"))` is `"cat" "dog" "pony"`<br>
+Example: `sort(c(1,2,3,40,41), decreasing = TRUE)` is `41 40 3 2 1`<br>
+Example: `sort(c("dog","cat","pony"), decreasing = TRUE)` is `"pony" "dog" "cat"`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`summary()`</th>
+<td>Get a list of summary statistics for a vector
+<p>Try it out: `summary(c(1,2,3,40,41))`</p></td>
+<p>Try it out: `summary(c("dog","cat","pony"))`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`table()`</th>
+<td>Count up the number of occurrences of each value in a vector
+<p>Try it out: `table(c(1,2,3,40,41))`</p></td>
+<p>Try it out: `table`(c("dog","cat","pony"))`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`unique()`</th>
+<td>Return only one instance of each value in a vector
+<p>Example: `unique(c(1,1,1,40,41))` is `1 40 41`</p></td>
+<p>Example: `length(unique(c(1,1,1,40,41)))` is `3`</p></td>
+</tr>
+</table>
+
+```{r try_stats, exercise=TRUE}
+
+```
+
+## 5. Vectorizing a data frame
+
+We'll spend the rest of the period playing with the `bannerweb` data set, made available by the `gramda` package. So that you can gain comfort with how to work with these things outside of a tutorial like this, we'll do so in RStudio's console. But first, one final lesson, on working with a single column of a data frame---useful now that you know a handful of functions of summary statistics.
+
+Take a look at the `bannerweb` data set by running the code block below. Remember that we need to load the `gramda` package before we can access the data sets that are included within it.
+
+```{r bannerweb-1, message=FALSE, exercise=TRUE}
+library(gramda)
+bannerweb
+```
+
+How many rows and columns are there? 
+
+To access a single column, we can use the `$` operator. In the code block below, type `bannerweb$` and notice that the column names autocomplete for you, making it easier to choose of them. Go ahead and choose one (for instance, `bannerweb$Subject`), and see what happens when you run the code chunk. Try using one of the functions we learned about today to see what it shows; a good option may be something like `length()` or `table()`, but don't limit yourself.
+
+```{r bannerweb-2, message=FALSE, exercise=TRUE, exercise.setup = "bannerweb-1"}
+
+```
+
+Are you surprised by the results you get for any of these columns? Why were you surprised?
