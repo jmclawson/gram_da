@@ -167,16 +167,16 @@ Now's your chance to double check your understanding so far. Don't worry: there'
 ```{r quiz}
 quiz(
   question("Which of the following shows the mathematic function 'two times three'?",
-    answer("2 + 3"),
-    answer("2 - 3"),
-    answer("2 * 3", correct = TRUE),
-    answer("2 / 3")
+    answer("`2 + 3`"),
+    answer("`2 - 3`"),
+    answer("`2 * 3`", correct = TRUE),
+    answer("`2 / 3`")
   ),
   question("Which of these operators is used for the assignment of a value to a name?",
-    answer("<-", correct = TRUE),
-    answer("%in%"),
-    answer("%%"),
-    answer("!=")
+    answer("`<-`", correct = TRUE),
+    answer("`%in%`"),
+    answer("`%%`"),
+    answer("`!=`")
   )
 )
 ```
