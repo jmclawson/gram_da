@@ -348,20 +348,20 @@ Example: `sort(c("dog","cat","pony"), decreasing = TRUE)` is `"pony" "dog" "cat"
 <tr>
 <th style="vertical-align: top;">`summary()`</th>
 <td>Get a list of summary statistics for a vector
-<p>Try it out: `summary(c(1,2,3,40,41))`</p></td>
-<p>Try it out: `summary(c("dog","cat","pony"))`</p></td>
+<p>Try it out: `summary(c(1,2,3,40,41))`<br>
+Try it out: `summary(c("dog","cat","pony"))`</p></td>
 </tr>
 <tr>
 <th style="vertical-align: top;">`table()`</th>
 <td>Count up the number of occurrences of each value in a vector
-<p>Try it out: `table(c(1,2,3,40,41))`</p></td>
-<p>Try it out: `table`(c("dog","cat","pony"))`</p></td>
+<p>Try it out: `table(c(1,2,3,40,41))`<br>
+Try it out: `table(c("dog","cat","pony"))`</p></td>
 </tr>
 <tr>
 <th style="vertical-align: top;">`unique()`</th>
 <td>Return only one instance of each value in a vector
-<p>Example: `unique(c(1,1,1,40,41))` is `1 40 41`</p></td>
-<p>Example: `length(unique(c(1,1,1,40,41)))` is `3`</p></td>
+<p>Example: `unique(c(1,1,1,40,41))` is `1 40 41`<br>
+Example: `length(unique(c(1,1,1,40,41)))` is `3`</p></td>
 </tr>
 </table>
 
