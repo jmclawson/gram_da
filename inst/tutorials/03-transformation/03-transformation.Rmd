@@ -97,7 +97,7 @@ banner_small <- select(bannerweb,
 ```
 
 If you want to work from the other direction, selecting everything but one or two columns, the minus sign is an easy way to drop a column you no longer want to consider:
-```{r show-deselect, exercise=TRUE}
+```{r show-deselect, exercise=TRUE, exercise.setup = "show-select-global"}
 select(banner_small, -Title)
 ```
 
@@ -113,13 +113,13 @@ dim(banner_small)
 
 The `filter()` function allows us to choose a subset of rows in the data set we're working with, building up a set of conditions that the data must follow. This function expects multiple arguments separated by commas: the first argument is the name of the data object we're filtering, and the other arguments are logical tests about the data. Here's how we'd filter the data to show only English courses, which all have the course prefix "ENG" shown in the "Subject" column:
 
-```{r banner-filter-1, exercise=TRUE}
+```{r banner-filter-1, exercise=TRUE, exercise.setup = "show-select-global"}
 filter(banner_small, Subject == "ENG")
 ```
 
 If we want to include a second or third condition, it's easy to add these:
 
-```{r banner-filter-2, exercise=TRUE}
+```{r banner-filter-2, exercise=TRUE, exercise.setup = "show-select-global"}
 banner_small2 <- filter(banner_small, 
        Subject == "ENG", 
        Campus == "Distance Learning", 
@@ -230,7 +230,7 @@ As the examples suggest, the exclamation point `!` negates other logical tests; 
 
 These tests are helpful for building the kinds of queries we might actually want to use to study a data set. Suppose, for instance, that we're looking for off-campus internships, and we want to earn a maximum of three credit hours. Use these operators to filter the `bannerweb` dataset, showing only those classes with the word "Internship" in their titles, taught anywhere except on the "Main" campus, and awarding 3 credit hours or fewer:
 
-```{r banner-filter-3, exercise=TRUE}
+```{r banner-filter-3, exercise=TRUE, exercise.setup = "show-select-global"}
 
 ```
 
@@ -354,13 +354,13 @@ quiz(
 ## 3. Arranging data
 
 Working from the narrower data set `banner_small`, let's arrange the rows by class size to discover which class has the most students. We do this using the `arrange()` function and then indicating which columns we'd like to put in order:
-```{r arrange-show, exercise=TRUE}
+```{r arrange-show, exercise=TRUE, exercise.setup = "show-select-global"}
 arrange(banner_small, Enrollment)
 ```
 
 The result isn't what we're looking for. Instead of emphasizing the largest classes, we've arranged the smallest classes first. But don't worry; it's easy to fix! The default setting sorts the rows so that this column's values are ascending. We can arrange them in descending order by using the `desc()` function. Make the change in the code block below, adding the `desc()` function around the "Enrollment" column.
 
-```{r arrange2-desc, exercise=TRUE}
+```{r arrange2-desc, exercise=TRUE exercise.setup = "show-select-global"}
 arrange(banner_small, Enrollment)
 ```
 
@@ -379,7 +379,7 @@ Sometimes a data set lacks a column that might be useful to study. If we're luck
 
 The `mutate()` function makes it easy to add and define columns. It even lets us reference other column names to do some math:
 
-```{r show-mutate, exercise=TRUE}
+```{r show-mutate, exercise=TRUE, exercise.setup = "show-select-global"}
 mutate(banner_small, 
        Available = Capacity - Enrollment)
 ```
