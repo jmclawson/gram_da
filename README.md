@@ -15,7 +15,7 @@ After `remotes` is finished installing, we have just one more step to install th
 remotes::install_github("jmclawson/gramda")
 ```
 
-When asked which versions of the packages you'd like to update, choose "1: All." If it asks you whether you'd like to install code that needs to be compiled, you should probably say "no".
+When asked which versions of the packages you'd like to update, type "1" (for "1: All"). If asked whether you'd like to install code that needs to be compiled, you should probably type "no" in response.
 
 ## Update
 
