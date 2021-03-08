@@ -29,7 +29,9 @@ bannerweb <- read.csv("~/Documents/Teaching/Grambling SU/CS 112 Big Data/bannerw
          #   strsplit(":") %>%
          #   sapply(`[`,1)
          ) %>%
-  # mutate()
+  mutate(Building = case_when(
+    Building == "15" ~"Jeanes",
+    TRUE             ~Building)) %>%
   mutate(Start.Numeric = case_when(
     Start.Time=="TBA" ~ as.numeric(NA),
     TRUE              ~ Start.Time %>%

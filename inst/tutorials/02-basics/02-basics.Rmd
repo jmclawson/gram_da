@@ -1,8 +1,10 @@
 ---
 title: "Lesson 2: Some of the Basics"
+author: "gramda"
 output: 
   learnr::tutorial:
     progressive: false
+    css: https://jmclawson.net/bigdata/tutorial-style.css
 runtime: shiny_prerendered
 description: >
   Gain familiarity with R by playing with some 
@@ -304,7 +306,7 @@ Try out any of the following in the code block below. Which do you think will be
 <tr>
 <th style="vertical-align: top;">`median()`</th>
 <td>Find the middle value of a vector of numbers
-<p>Example: `mean(c(1,2,3,40,41))` is `3`</p></td>
+<p>Example: `median(c(1,2,3,40,41))` is `3`</p></td>
 </tr>
 <tr>
 <th style="vertical-align: top;">`sum()`</th>

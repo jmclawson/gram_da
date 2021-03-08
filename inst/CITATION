@@ -1,0 +1,16 @@
+citHeader("To cite gramda use:")
+
+citEntry(entry = "Software",
+  title        = "{gramda}: Lessons and data for Grambling's DA course",
+  author       = personList(as.person("James Clawson")),
+  organization = "Grambling State University",
+  address      = "Grambling, LA",
+  year         = "2021",
+  url          = "https://github.com/jmclawson/gramda",
+
+  textVersion  =
+  paste("James Clawson (2021).",
+        "gramda: Lessons and data for Grambling's DA course.",
+        "Grambling State University. Grambling, LA.",
+        "URL https://github.com/jmclawson/gramda.")
+)

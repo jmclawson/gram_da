@@ -1,9 +1,10 @@
 ---
 title: "Lesson 1: Data Visualization in R"
-author: "James Clawson"
+author: "gramda"
 output: 
   learnr::tutorial:
-    progressive: true
+    progressive: false
+    css: https://jmclawson.net/bigdata/tutorial-style.css
 runtime: shiny_prerendered
 description: >
   Get started in R by using it to visualize 

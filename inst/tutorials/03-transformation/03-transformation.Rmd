@@ -1,0 +1,573 @@
+---
+title: "Lesson 3: Data Transformation"
+author: "gramda"
+output: 
+  learnr::tutorial:
+    progressive: true
+    css: https://jmclawson.net/bigdata/tutorial-style.css
+runtime: shiny_prerendered
+description: >
+  Learn about transforming data by using filters, 
+  summaries, and grouping. Covers using logical 
+  tests, importing data, and combining data sets.
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+library(tidyverse)
+library(gramda)
+
+gradethis_setup()
+
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## 1. Getting Started
+
+To start off any analysis, we need to load the necessary packages. We'll be using data from the `gramda` package and functions from the `tidyverse`.
+
+Load these two packages here:
+
+```{r libraries, exercise=TRUE}
+
+```
+
+```{r libraries-solution}
+library(gramda)
+library(tidyverse)
+```
+
+### 1.1 Look at the data
+
+We're starting with the `bannerweb` data set, found in the `gramda` package. Take a look at the data by typing its name:
+
+```{r banner-1, exercise=TRUE}
+
+```
+
+```{r banner-1-solution}
+bannerweb
+```
+
+```{r banner-1-check}
+grade_this_code()
+```
+
+### 1.2 Helpful functions
+We can also check the size of the data by using one of a few commands:
+
+<table>
+<tr>
+<th style="vertical-align: top;">`nrow()`</th>
+<td>Counts the number of rows in a data set
+<p>*Example:* `nrow(bannerweb)` is <code>`r nrow(bannerweb)`</code></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`ncol()`</th>
+<td>Counts the number of columns in a data set
+<p>*Example:* `ncol(bannerweb)` is <code>`r ncol(bannerweb)`</code></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`dim()`</th>
+<td>Returns the dimensions, showing the number of rows and the number of columns in a data set
+<p>*Example:* `dim(bannerweb)` is <code>`r dim(bannerweb)`</code></td>
+</tr>
+</table>
+
+At 1,039 rows, this is not a small data set. It shows all of the classes on offer in one semester at Grambling, which might be useful if we could narrow things down a little. What if, for instance, you wanted to see only the online English courses that have fewer than ten students, and you didn't care about their times or locations? 
+
+## 2. Seeing less
+
+### 2.1 Selecting columns
+
+If a data set has a lot of columns, some may be irrelevant for your purposes, making the data unwieldy and making it difficult to see the things you want to see. The `select()` function lets you choose to keep only a selection of columns, leaving the rest behind. 
+
+For instance, if we're interested in comparing capacity and enrollment across online and in-person courses, we don't need to see the number of credits, the building and room number, or the days and times the courses are offered. Here, we select the columns we want to keep, and we can even determine the order in which the columns appear:
+
+```{r show-select, exercise=TRUE}
+banner_small <- select(bannerweb, 
+                       Capacity, Enrollment, Campus, Subject, Course, Section, Title)
+banner_small
+```
+
+```{r show-select-global, include=FALSE}
+banner_small <- select(bannerweb, 
+                       Capacity, Enrollment, Campus, Subject, Course, Section, Title)
+```
+
+If you want to work from the other direction, selecting everything but one or two columns, the minus sign is an easy way to drop a column you no longer want to consider:
+```{r show-deselect, exercise=TRUE}
+select(banner_small, -Title)
+```
+
+Even though it's not strictly necessary, we're going keep this title column for now because it helps us recognize what class is represented by each row.
+
+Our new data set now has fewer columns, but the same number of rows: 
+
+```{r echo=TRUE}
+dim(banner_small)
+```
+
+### 2.2 Filtering a data set
+
+The `filter()` function allows us to choose a subset of rows in the data set we're working with, building up a set of conditions that the data must follow. This function expects multiple arguments separated by commas: the first argument is the name of the data object we're filtering, and the other arguments are logical tests about the data. Here's how we'd filter the data to show only English courses, which all have the course prefix "ENG" shown in the "Subject" column:
+
+```{r banner-filter-1, exercise=TRUE}
+filter(banner_small, Subject == "ENG")
+```
+
+If we want to include a second or third condition, it's easy to add these:
+
+```{r banner-filter-2, exercise=TRUE}
+banner_small2 <- filter(banner_small, 
+       Subject == "ENG", 
+       Campus == "Distance Learning", 
+       Enrollment < 15)
+
+banner_small2
+```
+
+```{r banner-filter-2-hide, include=FALSE}
+banner_small2 <- filter(banner_small, 
+       Subject == "ENG", 
+       Campus == "Distance Learning", 
+       Enrollment < 15)
+```
+
+Go ahead and try other filters here to get a sense for things.
+
+Looking at the data shows that it's now much smaller than the original `bannerweb`:
+
+```{r echo=TRUE}
+dim(banner_small2)
+```
+
+### 2.3 Logical tests
+
+You may have noticed the `==` and `<` used in our filters. The greater-than sign probably makes sense, but this is the first time we've seen the double equals sign. While an arrow `<-` is used for assigning a value to a name and a single equals sign `=` is used for setting a parameter within a function, the double equals sign `==` checks to see if two values are equal; if they are, it returns `TRUE`, resulting in `FALSE` if they aren't. And in the case of a `filter()` function, the final set of data we see includes only those rows for which every test returns `TRUE`.
+
+R offers a whole suite of logical tests we can use, formulated to work along single values or along vectors, like a column in a data frame. This is a long list, and it might seem overwhelming, but it's good to at least think about the kinds of ways you might filter a large data set:
+
+<table>
+<tr>
+<th style="vertical-align: top;">`x == y`</th>
+<td>*Asks:* Is `x` equal to `y`?
+<p>*Example:* `3 == 4` is `FALSE`<br>
+*Example:* `12 == 12` is `TRUE`<br>
+*Example:* `c(2, 3, 4) == 4` is `FALSE FALSE TRUE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`x > y`</th>
+<td>*Asks:* Is `x` greater than `y`?
+<p>*Example:* `3 > 4` is `FALSE`<br>
+*Example:* `12 > 12` is `FALSE`<br>
+*Example:* `c(2, 3, 4) > 4` is `FALSE FALSE FALSE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`x < y`</th>
+<td>*Asks:* Is `x` less than `y`?
+<p>*Example:* `3 < 4` is `TRUE`<br>
+*Example:* `12 < 12` is `FALSE`<br>
+*Example:* `c(2, 3, 4) < 4` is `TRUE TRUE FALSE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`x <= y`</th>
+<td>*Asks:* Is `x` less than or equal to `y`?
+<p>*Example:* `3 <= 4` is `TRUE`<br>
+*Example:* `12 <= 12` is `TRUE`<br>
+*Example:* `c(2, 3, 4) <= 4` is `TRUE TRUE TRUE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`x >= y`</th>
+<td>*Asks:* Is `x` greater than or equal to `y`?
+<p>*Example:* `3 >= 4` is `FALSE`<br>
+*Example:* `12 >= 12` is `TRUE`<br>
+*Example:* `c(2, 3, 4) >= 4` is `FALSE FALSE TRUE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`x %in% y`</th>
+<td>*Asks:* Is the value `x` in the vector `y`?
+<p>*Example:* `4 %in% 1:5` is `TRUE`<br>
+*Example:* `"dog" %in% c("dog", "cat")` is `TRUE`<br>
+*Example:* `c("dog", "bird") %in% c("dog", "cat")` is `TRUE FALSE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`grepl(y, x)`</th>
+<td>*Asks:* Is the pattern `y` a partial match for string `x`?
+<p>*Example:* `grepl("cat", "catastrophe")` is `TRUE`<br>
+*Example:* `grepl("c", c("cat", "bird"))` is `TRUE FALSE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`is.na(x)`</th>
+<td>*Asks:* Is `x` a missing value, `NA`?
+<p>*Example:* `is.na(3)` is `FALSE`<br>
+*Example:* `is.na(c(3, NA, 4))` is `FALSE TRUE FALSE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`x != y`</th>
+<td>*Asks:* Is `x` unequal to `y`?
+<p>*Example:* `3 != 4` is `TRUE`<br>
+*Example:* `12 != 12` is `FALSE`<br>
+*Example:* `c(2, 3, 4) != 4` is `TRUE TRUE FALSE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`x !< y`</th>
+<td>*Asks:* Is `x` not less than `y`?
+<p>*Example:* `3 !< 4` is `FALSE`<br>
+*Example:* `12 !< 12` is `TRUE`<br>
+*Example:* `c(2, 3, 4) !< 4` is `FALSE FALSE TRUE`</p></td>
+</tr>
+<tr>
+<th style="vertical-align: top;">`!(x %in% y)`</th>
+<td>*Asks:* Is the value `x` not in the vector `y`?
+<p>*Example:* `"!(dog" %in% c("dog", "cat"))` is `FALSE`<br>
+*Example:* `!(c("dog", "bird") %in% c("dog", "cat"))` is `FALSE TRUE`</p></td>
+</tr>
+</table>
+
+As the examples suggest, the exclamation point `!` negates other logical tests; the last example shows that it's sometimes necessary to form a test and then negate the whole test, rather than incorporating the exclamation point directly next to an operator.
+
+These tests are helpful for building the kinds of queries we might actually want to use to study a data set. Suppose, for instance, that we're looking for off-campus internships, and we want to earn a maximum of three credit hours. Use these operators to filter the `bannerweb` dataset, showing only those classes with the word "Internship" in their titles, taught anywhere except on the "Main" campus, and awarding 3 credit hours or fewer:
+
+```{r banner-filter-3, exercise=TRUE}
+
+```
+
+```{r banner-filter-3-hint-1}
+filter(bannerweb,
+       ___,
+       ___,
+       ___)
+```
+
+```{r banner-filter-3-hint-2}
+filter(bannerweb,
+       grepl(___, ___),
+       ___,
+       ___)
+```
+
+```{r banner-filter-3-hint-3}
+filter(bannerweb,
+       grepl("Internship", ___),
+       ___,
+       ___)
+```
+
+```{r banner-filter-3-hint-4}
+filter(bannerweb,
+       grepl("Internship", Title),
+       ___,
+       ___)
+```
+
+```{r banner-filter-3-hint-5}
+filter(bannerweb,
+       grepl("Internship", Title),
+       ___ != ___,
+       ___)
+```
+
+```{r banner-filter-3-hint-6}
+filter(bannerweb,
+       grepl("Internship", Title),
+       Campus != ___,
+       ___)
+```
+
+```{r banner-filter-3-hint-7}
+filter(bannerweb,
+       grepl("Internship", Title),
+       Campus != "Main",
+       ___)
+```
+
+```{r banner-filter-3-hint-8}
+filter(bannerweb,
+       grepl("Internship", Title),
+       Campus != "Main",
+       ___ <= ___)
+```
+
+```{r banner-filter-3-hint-9}
+filter(bannerweb,
+       grepl("Internship", Title),
+       Campus != "Main",
+       Credits <= ___)
+```
+
+```{r banner-filter-3-solution}
+filter(bannerweb,
+       grepl("Internship", Title),
+       Campus != "Main",
+       Credits <= 3)
+```
+
+```{r banner-filter-3-check}
+expectation <- filter(bannerweb,
+       grepl("Internship", Title),
+       Campus != "Main",
+       Credits <= 3)
+
+grade_this({
+  pass_if_equal(expectation)
+  fail("That's not what I was expecting. Double check your operators, look at the hints if you need to, and ask for help if you can't figure out where the code went wrong.")
+})
+```
+
+### 2.3 Checkpoint
+That's a lot so far. Let's review some of the things we've covered.
+
+```{r quiz-1}
+quiz(
+  question("What are some ways to check the dimensions (number of rows, number of columns) in a data frame? (Select all that apply)",
+    answer("Using `filter()`", correct = FALSE),
+    answer("Using `dim()`", correct = TRUE),
+    answer("Using `select()`", correct = FALSE),
+    answer("Using `ncol()`", correct = TRUE),
+    answer("Using `nrow()`", correct = TRUE),
+    type = "multiple",
+    random_answer_order = TRUE
+  ),
+  question("Which of these commands is useful for reducing the number of columns? (Select all that apply)",
+    answer("Using `filter()`", correct = FALSE),
+    answer("Using `dim()`", correct = FALSE),
+    answer("Using `select()`", correct = TRUE),
+    answer("Using `ncol()`", correct = FALSE),
+    answer("Using `nrow()`", correct = FALSE),
+    type = "multiple",
+    random_answer_order = TRUE
+  ),
+  question("Which of these commands is useful for reducing the number of rows? (Select all that apply)",
+    answer("Using `filter()`", correct = TRUE),
+    answer("Using `dim()`", correct = FALSE),
+    answer("Using `select()`", correct = FALSE),
+    answer("Using `ncol()`", correct = FALSE),
+    answer("Using `nrow()`", correct = FALSE),
+    type = "multiple",
+    random_answer_order = TRUE
+  )
+)
+```
+
+## 3. Arranging data
+
+Working from the narrower data set `banner_small`, let's arrange the rows by class size to discover which class has the most students. We do this using the `arrange()` function and then indicating which columns we'd like to put in order:
+```{r arrange-show, exercise=TRUE}
+arrange(banner_small, Enrollment)
+```
+
+The result isn't what we're looking for. Instead of emphasizing the largest classes, we've arranged the smallest classes first. But don't worry; it's easy to fix! The default setting sorts the rows so that this column's values are ascending. We can arrange them in descending order by using the `desc()` function. Make the change in the code block below, adding the `desc()` function around the "Enrollment" column.
+
+```{r arrange2-desc, exercise=TRUE}
+arrange(banner_small, Enrollment)
+```
+
+```{r arrange2-desc-solution}
+arrange(banner_small, desc(Enrollment))
+```
+
+```{r arrange2-desc-check}
+grade_this_code(correct="The class with the largest enrollment seems to be Marching Band. That makes sense!",
+                incorrect="Not quite! Did you remember to add `desc()` around the `Enrollment` column? Give it another try. (If you already did this, check the hint to see what's expected.)")
+```
+
+## 4. Adding columns
+
+Sometimes a data set lacks a column that might be useful to study. If we're lucky, this missing variable can be derived from the columns we already have. The `bannerweb` data set has columns for Capacity, showing the maximum number of students expected to be in a class, and for Enrollment, which shows the actual number of students in a class. But it lacks a column showing the number of available seats left in a class. We can figure this out by subtracting Enrollment from Capacity.
+
+The `mutate()` function makes it easy to add and define columns. It even lets us reference other column names to do some math:
+
+```{r show-mutate, exercise=TRUE}
+mutate(banner_small, 
+       Available = Capacity - Enrollment)
+```
+
+This column gets added at the far right. We *could* reorder our columns by saving the results into a new object and using `select()`, but that seems like a hassle. A better option for chaining together many transformations is to use a pipe.
+
+## 5. Piping things together
+
+Using parentheses to show the order of functions in R can get overwhelming. From a previous lesson, we remember that it's possible to count the number of unique items in a vector by wrapping one function around another, taking pains to track every pair of parentheses to know where each function begins and ends. For instance, to count the number of unique course prefixes in the `bannerweb` data set, we would reference the Subject column as a vector inside the `unique()` function, and then put *that* inside the `length()` function:
+
+```{r before-pipe, echo=TRUE}
+length(unique(bannerweb$Subject))
+```
+
+Although we read English from left to right, we can only follow the code by reading it inside out, starting with `bannerweb$Subject`, moving outward one level to get to `unique()`, and then moving outward one more level to arrive at `length()`. We're smart, so we can do this, but we're also smart enough to avoid unnecessary difficulty. 
+
+The **pipe** operator `%>%` allows us to change the order of things to match the left-to-right expectations of English. It works by *piping* from the left into the function on the right so that everything from the left becomes the first argument expected inside a function:
+
+```{r first-pipe, echo=TRUE}
+bannerweb$Subject %>% unique() %>% length()
+```
+
+The result is the same, and the operations are the same, but the way we write the code now better matches how we'd describe what we're doing: 
+
+<blockquote>"*Starting with bannerweb's Subject column, find all the unique values, and then count them.*"</blockquote>
+
+Our example is not so unwieldy. But consider this chain of filtering a dataset, adding a column, selecting certain columns, and then arranging the rows:
+
+```{r before2-pipe2, eval=TRUE, echo=TRUE}
+arrange(select(mutate(filter(bannerweb, 
+                             Subject == "ENG", 
+                             Campus == "Distance Learning", 
+                             Enrollment <= 25), 
+                      Available = Capacity - Enrollment), 
+               Available, Subject, Course, Section, Title), 
+        desc(Available))
+```
+
+This code is hard to read. The last line of the code block, `desc(Available))`, is an argument belonging to the first function called, `arrange()`, but it isn't especially obvious here where it belongs; moreover, the first function we see is the last one that gets applied, which gets confusing very quickly. Most confusing is that we're left holding our breaths as we read this code: since the first argument of any function is always its most important, we're forced to delay discovery of the thing that's most important, to dive deeper and deeper until we reach the bottom, then to turn around and climb our way out of a stack of parentheses. *Inception* was a good movie, but it isn't readable code. If this example didn't show the unnecessary indentation, it would be very hard to understand what it's doing. 
+
+Compare the above example to code that chains steps together with the use of pipes `%>%`:
+
+```{r after2-pipe2, echo=TRUE}
+bannerweb %>% 
+  filter(Subject == "ENG", 
+         Campus == "Distance Learning", 
+         Enrollment <= 25) %>% 
+  mutate(Available = Capacity - Enrollment) %>% 
+  select(Available, Subject, Course, Section, Title) %>% 
+  arrange(desc(Available))
+```
+
+This version is easier to read, showing each function as one step that leads into the next:
+
+1. Start from the `bannerweb` data set;
+2. apply a `filter()` to select only the rows that match three conditions;
+3. add a column called "Available" by using `mutate()`;
+4. use `select()` to keep only certain columns, in a certain order;
+5. `arrange()` rows so that the "Available" column is in descending order.
+
+Not only does the pipe make this code easier to read, but it also makes it trivial for us to add more steps in any process. To see how easy it can be, extend the code below: add a pipe to the end of the last line, then add a new final line using `select()` to drop the "Section" column (remember, the minus sign makes it easy to drop a column!):
+
+```{r after3-pipe3, exercise=TRUE}
+bannerweb %>% 
+  filter(Subject == "ENG", 
+         Campus == "Distance Learning", 
+         Enrollment <= 25) %>% 
+  mutate(Available = Capacity - Enrollment) %>% 
+  select(Available, Subject, Course, Section, Title) %>% 
+  arrange(desc(Available))
+```
+
+```{r after3-pipe3-hint-1}
+bannerweb %>% 
+  filter(Subject == "ENG", 
+         Campus == "Distance Learning", 
+         Enrollment <= 25) %>% 
+  mutate(Available = Capacity - Enrollment) %>% 
+  select(Available, Subject, Course, Section, Title) %>% 
+  arrange(desc(Available)) %>% 
+
+```
+
+```{r after3-pipe3-hint-2}
+bannerweb %>% 
+  filter(Subject == "ENG", 
+         Campus == "Distance Learning", 
+         Enrollment <= 25) %>% 
+  mutate(Available = Capacity - Enrollment) %>% 
+  select(Available, Subject, Course, Section, Title) %>% 
+  arrange(desc(Available)) %>% 
+  select(___)
+```
+
+```{r after3-pipe3-solution}
+bannerweb %>% 
+  filter(Subject == "ENG", 
+         Campus == "Distance Learning", 
+         Enrollment <= 25) %>% 
+  mutate(Available = Capacity - Enrollment) %>% 
+  select(Available, Subject, Course, Section, Title) %>% 
+  arrange(desc(Available)) %>% 
+  select(-Section)
+```
+
+```{r after3-pipe3-check}
+grade_this_code()
+```
+
+### 5.1 Checkpoint
+Whew! Time for another review of what we've covered since the last review.
+
+```{r quiz-2}
+quiz(
+  question("Which of the following options do we use to order a data frame by the values in a particular column? (Select all that apply)",
+    answer("Using `filter()`", correct = FALSE),
+    answer("Using `mutate()`", correct = FALSE),
+    answer("Using `select()`", correct = FALSE),
+    answer("Using `arrange()`", correct = TRUE),
+    type = "multiple",
+    random_answer_order = TRUE
+  ),
+  question("Which of the following is used to add a column to a data frame? (Select all that apply)",
+    answer("Using `filter()`", correct = FALSE),
+    answer("Using `mutate()`", correct = TRUE),
+    answer("Using `select()`", correct = FALSE),
+    answer("Using `arrange()`", correct = FALSE),
+    type = "multiple",
+    random_answer_order = TRUE
+  ),
+  question("Which of these is for reversing the order of rows when we sort by values in a column? (Select all that apply)",
+    answer("Using `desc()`", correct = TRUE),
+    answer("Using `decr()`", correct = FALSE),
+    answer("Using `reverse()`", correct = FALSE),
+    answer("Using `backwards()`", correct = FALSE),
+    answer("Adding a minus sign before the column name", correct = TRUE),
+    incorrect = "I know, I know. It's not fair. I never told you that you a minus sign can be used to reverse the order. (Well, I'm telling you know.)",
+    type = "multiple",
+    random_answer_order = TRUE
+  ),
+  question("The 'pipe' command allows you to change the order of commands so that it goes from left to right. But how do we type the 'pipe'?",
+    answer("%>%", correct = TRUE),
+    type = "learnr_text",
+    allow_retry = TRUE
+  )
+)
+```
+
+## 6. Summarizing a group
+
+Indispensable to the study of any large data set is way of summarizing data by group. With the `dplyr` package included as part of the `tidyverse`, we do this with two functions: `group_by()` and `summarize()`:
+
+```{r group-and-summarize, exercise=TRUE}
+bannerweb %>% 
+  group_by(Subject) %>% 
+  summarize(`Number of Classes` = n(),
+            `Median Size` = median(Enrollment),
+            `Total Students` = sum(Enrollment)) %>% 
+  arrange(desc(`Number of Classes`))
+```
+
+In addition to the `group_by()` and `summarize()` functions, this code also shows the `n()` function used to count the number of items in a group and the way of using back-ticks `` ` ` `` to surround a column name with spaces.
+
+Put it all together in the code block below: 
+
+1. Using pipes, start from `bannerweb`; 
+2. `filter()` the data set to include only classes worth 3 credit hours; 
+3. use `mutate()` to add a new column called "Fullness", calculated by dividing enrollment by capacity; 
+4. `group_by()` subject and use `summarize()` to find the "Median Fullness" in each subject area (*remember to remove NA values!*);
+5. finally, `arrange()` the rows so that this "Median Fullness" value is descending.
+
+```{r all-together, exercise=TRUE}
+
+```
+
+```{r all-together-solution, exercise.reveal_solution=FALSE}
+bannerweb %>% 
+  filter(Credits == 3) %>% 
+  mutate(Fullness = Enrollment / Capacity) %>% 
+  group_by(Subject) %>% 
+  summarize(`Median Fullness` = median(Fullness, na.rm = TRUE)) %>% 
+  arrange(desc(`Median Fullness`))
+```
+
+```{r all-together-check}
+grade_this_code()
+```
+
+Once you've finished writing the code, consider your results. What's the median fullness for the top entry? What does that mean? Why did you get that result? (You might have to go back to the data set to look more closely at the rows that are relevant for this subject area to figure out where the error creeps in.)
+
+
