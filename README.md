@@ -9,14 +9,13 @@ Because this package is not found on CRAN, you'll first need either the `devtool
 install.packages("remotes")
 ```
 
-When `remotes` is finished installing, we have just two more steps to install the `gradethis` and `gramda` packages:
+When `remotes` is finished installing,^[If you already have `devtools`, replace `remotes::` with `devtools::` in your instance.] we have just one more step to install the `gramda` package:
 
 ```{r}
-remotes::install_github("rstudio-education/gradethis")
 remotes::install_github("jmclawson/gramda")
 ```
 
-When asked which versions of the packages you'd like to update, choose "1: All" or "2: CRAN packages only." If it asks you whether you'd like to install code that needs to be compiled, you're probably safe to say "no".
+When asked which versions of the packages you'd like to update, choose "1: All." If it asks you whether you'd like to install code that needs to be compiled, you should probably say "no".
 
 ## Update
 
@@ -43,7 +42,7 @@ Once the package is loaded, a few data sets are also made available:
 <dt>swac</dt>
 <dd>2019 football season records for member institutions of the Southwestern Athletic Conference</dd>
 
-<dt>bannerweb (coming soon)</dt>
+<dt>bannerweb</dt>
 <dd>course schedules and class sizes from a recent semester</dd>
 
 <dt>sneaux21 (coming soon)</dt>
