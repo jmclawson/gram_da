@@ -105,8 +105,14 @@ Even though it's not strictly necessary, we're going keep this title column for 
 
 Our new data set now has fewer columns, but the same number of rows: 
 
-```{r echo=TRUE}
+```{r bs_dim-1, eval=FALSE, echo=TRUE}
 dim(banner_small)
+```
+
+```{r bs_dim-2, eval=FALSE, echo=TRUE}
+select(bannerweb, 
+                       Capacity, Enrollment, Campus, Subject, Course, Section, Title) %>% 
+  dim()
 ```
 
 ### 2.2 Filtering a data set
