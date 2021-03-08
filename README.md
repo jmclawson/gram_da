@@ -2,7 +2,7 @@
 
 Lessons and data for Grambling's DA course
 
-## Installation
+## Install
 Because this package is not found on CRAN, you'll first need either the `devtools` or `remotes` package to install it. If you don't already have the `devtools` package installed, then install `remotes` with this line of code (which you can skip if you already have the package installed):
 
 ```{r}
