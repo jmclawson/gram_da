@@ -360,7 +360,7 @@ arrange(banner_small, Enrollment)
 
 The result isn't what we're looking for. Instead of emphasizing the largest classes, we've arranged the smallest classes first. But don't worry; it's easy to fix! The default setting sorts the rows so that this column's values are ascending. We can arrange them in descending order by using the `desc()` function. Make the change in the code block below, adding the `desc()` function around the "Enrollment" column.
 
-```{r arrange2-desc, exercise=TRUE exercise.setup = "show-select-global"}
+```{r arrange2-desc, exercise=TRUE, exercise.setup = "show-select-global"}
 arrange(banner_small, Enrollment)
 ```
 
