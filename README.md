@@ -3,7 +3,7 @@
 Lessons and data for Grambling's DA course
 
 ## Install
-Because this package is not found on CRAN, you'll first need either the `devtools` or `remotes` package to install it. If you don't already have the `devtools` package installed, then install `remotes` with this line of code:
+Because this package is not found on CRAN, you'll first need either the `devtools` or `remotes` package to install it. If you don't already have the `devtools` package installed, install `remotes` by entering this line in the RStudio console:
 
 ```{r}
 install.packages("remotes")
