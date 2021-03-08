@@ -605,7 +605,17 @@ bannerweb %>%
 ```
 
 ```{r all-together-check}
-grade_this_code()
+expectation <- bannerweb %>% 
+  filter(Credits == 3) %>% 
+  mutate(Fullness = Enrollment / Capacity) %>% 
+  group_by(Subject) %>% 
+  summarize(`Median Fullness` = median(Fullness, na.rm = TRUE)) %>% 
+  arrange(desc(`Median Fullness`))
+
+grade_this({
+  pass_if_equal(expectation)
+  fail()})
+
 ```
 
 Once you've finished writing the code, consider your results. What's the median fullness for the top entry? What does that mean? Why did you get that result? (You might have to go back to the data set to look more closely at the rows that are relevant for this subject area to figure out where the error creeps in.)
