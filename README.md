@@ -9,7 +9,7 @@ Because this package is not found on CRAN, you'll first need either the `devtool
 install.packages("remotes")
 ```
 
-When `remotes` is finished installing,^[If you already have `devtools`, replace `remotes::` with `devtools::` in your instance.] we have just one more step to install the `gramda` package:
+After `remotes` is finished installing, we have just one more step to install the `gramda` package. (If you already have `devtools` installed, replace `remotes::` with `devtools::` in this next line of code.) 
 
 ```{r}
 remotes::install_github("jmclawson/gramda")
