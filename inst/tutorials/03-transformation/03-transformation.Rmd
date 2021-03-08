@@ -505,7 +505,28 @@ bannerweb %>%
 ```
 
 ```{r after3-pipe3-check}
-grade_this_code()
+expectation <- bannerweb %>% 
+  filter(Subject == "ENG", 
+         Campus == "Distance Learning", 
+         Enrollment <= 25) %>% 
+  mutate(Available = Capacity - Enrollment) %>% 
+  select(Available, Subject, Course, Section, Title) %>% 
+  arrange(desc(Available)) %>% 
+  select(-Section)
+
+badun <- bannerweb %>% 
+  filter(Subject == "ENG", 
+         Campus == "Distance Learning", 
+         Enrollment <= 25) %>% 
+  mutate(Available = Capacity - Enrollment) %>% 
+  select(Available, Subject, Course, Section, Title) %>% 
+  arrange(desc(Available))
+
+grade_this({
+  pass_if_equal(expectation)
+  fail_if_equal(badun, "Did you forget to drop the `Section` column? Check the hint.")
+  fail("It might be a good idea to hit the 'Start Over' button to bring your code back up to a good starting point.")})
+
 ```
 
 ### 5.1 Checkpoint
