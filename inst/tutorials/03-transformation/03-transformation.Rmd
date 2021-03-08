@@ -135,6 +135,8 @@ banner_small2
 ```
 
 ```{r banner-filter-2-hide, include=FALSE}
+banner_small <- select(bannerweb, Capacity, Enrollment, Campus, Subject, Course, Section, Title)
+
 banner_small2 <- filter(banner_small, 
        Subject == "ENG", 
        Campus == "Distance Learning", 
@@ -145,8 +147,19 @@ Go ahead and try other filters here to get a sense for things.
 
 Looking at the data shows that it's now much smaller than the original `bannerweb`:
 
-```{r echo=TRUE}
+```{r bs2_dim-1, echo=TRUE, eval=FALSE}
 dim(banner_small2)
+```
+
+```{r bs2_dim-2, echo=FALSE, eval=TRUE}
+select(bannerweb, 
+       Capacity, Enrollment, 
+       Campus, Subject, Course, 
+       Section, Title) %>% 
+  filter(Subject == "ENG", 
+       Campus == "Distance Learning", 
+       Enrollment < 15) %>% 
+  dim()
 ```
 
 ### 2.3 Logical tests
