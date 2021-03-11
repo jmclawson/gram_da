@@ -3,7 +3,7 @@
 Lessons and data for Grambling's DA course
 
 ## Install
-The material in these tutorials expects R to have the `tidyverse` suite of packages installed. If you don't already have it, download it with this command in RStudio's console:
+The material in these tutorials expects the `tidyverse` suite of packages to be installed. If you don't already have it, download it with this command in RStudio's console:
 
 ```{r}
 install.packages("tidyverse")
