@@ -31,5 +31,3 @@ Depends:
     tibble,
     R (>= 3.5.0)
 RoxygenNote: 7.1.1
-Remotes:  
-    rstudio-education/gradethis
