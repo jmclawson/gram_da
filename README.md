@@ -3,6 +3,12 @@
 Lessons and data for Grambling's DA course
 
 ## Install
+The material in these tutorials expects R to have the `tidyverse` suite of packages installed. If you don't already have it, download it with this command in RStudio's console:
+
+```{r}
+install.packages("tidyverse")
+```
+
 Because this package is not found on CRAN, you'll first need either the `devtools` or `remotes` package to install it. If you don't already have the `devtools` package installed, install `remotes` by entering this line in the RStudio console:
 
 ```{r}
