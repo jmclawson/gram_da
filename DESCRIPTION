@@ -30,4 +30,7 @@ Depends:
     dplyr,
     tibble,
     R (>= 3.5.0)
+Remotes: 
+    rstudio/learnr
+    rstudio-education/gradethis
 RoxygenNote: 7.1.1
