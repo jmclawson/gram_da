@@ -9,9 +9,10 @@ Because this package is not found on CRAN, you'll first need either the `devtool
 install.packages("remotes")
 ```
 
-After `remotes` is finished installing, we have just one more step to install the `gramda` package. If you're using `devtools` instead, replace `remotes::` with `devtools::` here. 
+After `remotes` is finished installing, we have just two more steps to install the `gramda` package. If you're using `devtools` instead, replace `remotes::` with `devtools::` here. 
 
 ```{r}
+remotes::install_github("rstudio-education/gradethis")
 remotes::install_github("jmclawson/gramda")
 ```
 
