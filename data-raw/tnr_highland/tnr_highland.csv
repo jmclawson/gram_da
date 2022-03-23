@@ -1,0 +1,107 @@
+number,name,color_markings,hair_length,sex,date_trapped,trapper_name,surgery,eartip,vaccines,location,notes
+1,Han Solo,Black and White,DSH,M,2021-02-02,JC,Neuter,TRUE,Rabies,Scovell St,Nose spot
+2,C3PO,Tabby,DSH,M,2021-02-04,JC,Neuter,TRUE,Rabies,Gladstone & Thornill,NA
+3,R2D2,Gray,DSH,M,2021-02-04,JC,Neuter,TRUE,Rabies,Gladstone & Thornill,NA
+4,Vader,Black,DSH,M,2021-02-04,JC,ABN,TRUE,Rabies,Gladstone & Thornill,White paws
+5,Leia,Orange Tabby,DSH,M,2021-02-09,JC,ABN,TRUE,Rabies,Gladstone & Thornill,NA
+6,Luke,Tabby,DSH,F,2021-02-09,JC,Spay,TRUE,Rabies,Gladstone & Thornill,White paws
+7,Chewbacca,Black,DSH,M,2021-02-10,JC,Neuter,TRUE,Rabies,600 Robinson,NA
+8,Cap America,Brown Tabby,DSH,F,2021-02-23,JC,Spay,TRUE,Rabies,Gladstone & Thornill,Bobtail
+9,Black Widow,White Tabby,DSH,F,2021-02-23,JC,Spay,TRUE,Rabies,Gladstone & Thornill,NA
+10,Hulk,Tuxedo,DSH,M,2021-02-28,JC,Neuter,TRUE,Rabies,3625 Southern,NA
+11,Ironman,Black,DSH,M,2021-02-28,JC,Neuter,TRUE,Rabies,3625 Southern,White paws
+12,Beignet,Black,DSH,F,2021-03-03,JC,ABS,TRUE,Rabies,100 Prospect,NA
+13,Roux,Tuxedo,DSH,M,2021-03-03,JC,Neuter,TRUE,Rabies,600 Robinson,NA
+14,PoBoy,Tabby,DSH,M,2021-03-03,JC,Neuter,TRUE,Rabies,600 Robinson,NA
+15,Gumbo,Tabby,DSH,M,2021-03-03,JC,Neuter,TRUE,Rabies,600 Robinson,NA
+16,Etouffee,Tortie,DSH,F,2021-03-03,JC,Spay,TRUE,Rabies,500 Jordan,Preg term
+17,Red Beans,Tabby,DSH,F,2021-03-03,JC,Spay,TRUE,Rabies,500 Jordan,NA
+18,Andouille,Orange Tabby,DSH,F,2021-03-03,JC,Spay,TRUE,Rabies,500 Jordan,NA
+19,Tabasco,Black,DSH,F,2021-03-09,JC,Spay,TRUE,Rabies,500 Jordan,NA
+20,Jambalaya,Tuxedo,DSH,F,2021-03-10,JC,Spay,TRUE,Rabies,900 Linden,Preg term
+21,Boudin,Orange Tabby,DSH,M,2012-03-11,JC,Neuter,TRUE,Rabies,100 Prospect,NA
+22,Crawfish,Black,DSH,F,2021-03-16,LS,Spay,TRUE,Rabies,233 Wilkinson,NA
+23,Trinity,Black,DSH,F,2021-03-16,LS,Spay,TRUE,Rabies,233 Wilkinson,White patch
+24,Gator,White Gray,DSH,F,2021-04-06,JC,ABS,TRUE,Rabies,2612 Highland,Ear tipped
+25,Thor,Black,DSH,M,2021-04-06,LS,Neuter,TRUE,Rabies,2519 Pinehurst,NA
+26,Frenchman,Gray Tabby,DSH,F,2021-04-13,JC,Spay,TRUE,Rabies,1130 Busby,Preg term
+27,Magazine,Black,DSH,F,2021-04-13,JC,Spay,TRUE,Rabies,1130 Busby,Preg term
+28,Royal,Calico,DLH,F,2021-04-13,JC,Spay,TRUE,Rabies,530 Dalzell,In heat
+29,Poydras,Brown Tabby,DSH,M,2021-04-13,JC,Neuter,TRUE,Rabies,1130 Busby,NA
+30,St. Charles,White Tabby,DSH,M,2021-04-15,JC,Neuter,TRUE,Rabies,1130 Busby,NA
+31,Canal,Gray Tabby,DSH,M,2021-04-15,JC,Neuter,TRUE,Rabies,1130 Busby,Flat ears
+32,Decatur,Brown Tabby,DSH,F,2021-04-15,JC,Spay,TRUE,Rabies,1130 Busby,NA
+33,St. Claude,Black Tortie,DSH,M,2021-04-15,JC,Neuter,TRUE,Rabies,200 Washington,Injured/Scabies
+34,Rampart,Gray Tabby,DSH,M,2021-04-15,JA,Neuter,TRUE,Rabies,300 Lister,NA
+35,Basin St.,Gray Tabby,DSH,M,2021-04-15,JA,Neuter,TRUE,Rabies,300 Lister,NA
+36,Esplanade,Orange Tabby,DSH,M,2021-04-15,JA,Neuter,TRUE,Rabies,300 Lister,NA
+37,Carondelet,Gray Tabby,DSH,F,2021-04-15,JA,Spay,TRUE,Rabies,300 Lister,Preg term
+38,Satchmo,Brown Tabby,DSH,M,2021-04-20,JC,Neuter,TRUE,Rabies,1130 Busby,NA
+39,Leveau,White Tabby,DSH,M,2021-04-20,JC,ABN,TRUE,Rabies,1130 Busby,NA
+40,Abita,Calico,DSH,F,2021-04-28,JC,Spay,TRUE,Rabies,400 Dalzell,P2
+41,Jax,Black,DSH,M,2021-05-13,JC,ABN,TRUE,Rabies,500 College,NA
+42,Voodoo,Black,DSH,F,2021-05-13,JC,Spay,TRUE,Rabies,500 College,NA
+43,Sazerac,Black,DSH,M,2021-05-13,JC,Neuter,TRUE,Rabies,500 College,NA
+44,Emeril,Orange Tabby,DSH,M,2021-05-13,JC,Neuter,TRUE,Rabies,200 Lister,NA
+45,Chicory,Gray Dilute,DSH,F,2021-05-13,JA,Spay,TRUE,Rabies,300 Lister,P3
+46,Avoyelles,Orange Tabby,DSH,M,2021-05-20,JA,Neuter,TRUE,Rabies,662 Dalzell,NA
+47,Acadia,Gray Tabby,DSH,F,2021-05-20,JA,Spay,TRUE,Rabies,662 Dalzell,P1
+48,Ascension,Gray Tabby,DSH,M,2021-05-20,JA,Neuter,TRUE,Rabies,200 Washington,NA
+49,Walter,Brown Tabby,DSH,M,2021-06-29,LS,Neuter,TRUE,Rabies,216 Washington,NA
+50,Mardi,Gray Tabby,DSH,F,2021-06-29,LS,Spay,TRUE,Rabies,216 Washington,NA
+51,Allie,Tabby,DSH,F,2021-07-01,LS,ABS,TRUE,Rabies,216 Washington,NA
+52,Agro,Black,DSH,M,2021-07-01,LS,Neuter,TRUE,Rabies,216 Washington,NA
+53,Baptiste,Tortie,DSH,F,2021-07-26,JC,Spay,TRUE,Rabies,300 College,NA
+54,Reynaud,Tabby,DSH,F,2021-07-26,JC,Spay,TRUE,Rabies,300 College,NA
+55,Beauregard,Black,DLH,M,2021-07-28,JC,Neuter,TRUE,Rabies,200 E Fairview,NA
+56,Peyroux,Calico,DLH,F,2021-07-28,JC,Spay,TRUE,Rabies,200 E Fairview,NA
+57,Eta (Ata),Tabby,DSH,F,2021-08-02,LS,Spay,TRUE,Rabies,2519 Pinehurst,white paws
+58,Mu,Tabby,DSH,M,2021-08-02,LS,Neuter,TRUE,Rabies,2519 Pinehurst,white paws
+59,Kappa,Tabby,DSH,M,2021-08-02,LS,Neuter,TRUE,Rabies,2519 Pinehurst,NA
+60,Clancy's,Black,DSH,M,2021-08-03,KC,Neuter,TRUE,Rabies,200 E Fairview,abscess wound cleaned behind ear
+61,Finn,Gray and White,DSH,M,2021-08-09,LS,Neuter,TRUE,Rabies,216 Washington,mustache
+62,Smudge,Tabby,DSH,F,2021-08-09,LS,Spay,TRUE,Rabies,216 Washington,NA
+63,Mosca's,Calico,DSH,F,2021-08-09,JC,Spay,TRUE,Rabies,400 Dalzell,NA
+64,Domilise's,Orange Tabby,DSH,F,2021-08-09,JC,Spay,TRUE,Rabies,400 Dalzell,NA
+65,Kacheek,Orange Tabby,DSH,M,2021-08-09,KC,Neuter,TRUE,Rabies,300 College,NA
+66,Kougra,Orange Tabby,DSH,M,2021-08-09,KC,Neuter,TRUE,Rabies,300 College,NA
+67,Iberia,Gray Tabby,DSH,F,2021-08-12,JC,Spay,TRUE,Rabies,100 E Egan,NA
+68,Ouachita,Black,DSH,F,2021-08-12,JC,Spay,TRUE,Rabies,100 E Egan,elderly cat died during spay surgery
+69,Calcasieu,Tuxedo,DSH,M,2021-08-12,JC,Neuter,TRUE,Rabies,100 E Egan,NA
+70,Drew Brees,Gray Tabby,DSH,F,2021-08-23,JB,Spay,TRUE,Rabies,300 Rutherford,NA
+71,Eric Martin,Black,DSH,M,2021-08-23,JB,Neuter,TRUE,Rabies,300 Rutherford,NA
+72,Archie,Orange Tabby,DSH,M,2021-08-23,JB,Neuter,TRUE,Rabies,300 Rutherford,NA
+73,Colston,Tortie,DSH,F,2021-08-23,JB,Spay,TRUE,Rabies,300 Rutherford,NA
+74,Rickey Jackson,Orange Tabby,DSH,M,2021-09-02,JB,Neuter,TRUE,Rabies,300 Rutherford,NA
+75,Alvin Kamara,Gray,DSH,M,2021-09-02,JB,Neuter,TRUE,Rabies,300 Rutherford,NA
+76,Deuce McAllister,Gray Tabby,DSH,M,2021-09-02,JB,Neuter,TRUE,Rabies,300 Rutherford,NA
+77,Roaf,Gray Tabby,DSH,F,2021-09-02,JB,Spay,TRUE,Rabies,300 Rutherford,NA
+78,Bobby Jinal,Gray Tabby,DSH,F,2021-09-20,JC,Spay,TRUE,Rabies,200 E Fairview,NA
+79,Kathleen Blanco,Gray Tabby,DSH,F,2021-09-20,JC,Spay,TRUE,Rabies,200 E Fairview,NA
+80,John Bel Edwards,Calico,DSH,F,2021-09-23,JB,Spay,TRUE,Rabies,300 Rutherford,NA
+81,Huey P. Long,Dilute Gray,DSH,F,2021-09-23,JB,Spay,TRUE,Rabies,300 Rutherford,NA
+82,Mike Foster,Calico,DSH,F,2021-09-23,JB,Spay,TRUE,Rabies,300 Rutherford,NA
+83,Edwin Edwards,Gray Tabby,DSH,F,2021-09-23,JB,Spay,TRUE,Rabies,300 Rutherford,NA
+84,Earl K. Long,Calico,DSH,F,2021-09-27,JC,Spay,TRUE,Rabies,200 E Fairview,NA
+85,Buddy Roemer,Tortie,DSH,F,2021-09-27,JC,Spay,TRUE,Rabies,200 E Fairview,NA
+86,John McKeithen,Tortie,DSH,F,2021-09-28,JC,Spay,TRUE,Rabies,200 E Fairview,NA
+87,Madam CJ Walker,Tuxedo,DSH,M,2021-10-11,JC,Neuter,TRUE,Rabies,100 E Egan,NA
+88,James Carville,Tuxedo,DSH,M,2021-10-11,JC,Neuter,TRUE,Rabies,100 E Egan,NA
+89,Lydia,Black,DSH,M,2021-10-14,LS,Neuter,TRUE,Rabies,200 Washington,NA
+90,Wednesday,White Tabby,DSH,F,2021-10-14,LS,Spay,TRUE,Rabies,200 Washington,NA
+91,Patricia Clarkson,Black,DSH,M,2021-10-20,JC,Neuter,TRUE,Rabies,800 Elmwood,NA
+92,Master P,Brown Tabby,DSH,M,2021-10-20,JC,Neuter,TRUE,Rabies,800 Elmwood,NA
+93,Mahalia Jackson,Black,DSH,M,2021-10-20,JC,Neuter,TRUE,Rabies,800 Elmwood,NA
+94,Ernest J Gaines,Brown Tabby,DSH,M,2021-11-11,JC,Neuter,TRUE,Rabies,500 Wilkinson,NA
+95,Kitty Carlisle,Brown Tabby,DSH,M,2021-11-11,JC,Neuter,TRUE,Rabies,500 Wilkinson,NA
+96,Mabon,Gray Tabby,DSH,F,2021-11-30,JC,Spay,TRUE,Rabies,2500 Pinehurst,NA
+97,Samhain,Gray Tabby,DSH,F,2021-11-30,JC,Spay,TRUE,Rabies,2500 Pinehurst,NA
+98,Yule,White Tabby,DSH,F,2021-11-30,JC,Spay,TRUE,Rabies,2500 Pinehurst,NA
+99,Wilbur,Calico,DSH,F,2021-11-18,JB,Spay,TRUE,Rabies,300 Rutherford,NA
+100,Ninette,Black,DSH,F,2021-12-02,CC,Spay,TRUE,Rabies,2500 Pinehurst,NA
+101,Celeste,Gray Tabby,DSH,F,2021-12-02,CC,Spay,TRUE,Rabies,2500 Pinehurst,NA
+102,Tiboy,Black,DSH,F,2021-12-02,CC,Spay,TRUE,Rabies,2500 Pinehurst,NA
+103,Gaston,Gray Tabby,DSH,M,2021-12-02,CC,Neuter,TRUE,Rabies,2500 Pinehurst,NA
+104,Papa Noel,Gray Tabby,DSH,M,2021-12-16,CC,Neuter,TRUE,Rabies,2500 Pinehurst,NA
+105,Rudolph,Gray Tabby,DSH,F,2021-12-16,CC,Spay,TRUE,Rabies,2500 Pinehurst,NA
+106,Dasher,Gray Tabby,DSH,F,2021-12-16,CC,Spay,TRUE,Rabies,2500 Pinehurst,NA

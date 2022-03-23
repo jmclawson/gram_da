@@ -51,6 +51,9 @@ Once the package is loaded, a few data sets are also made available:
 <dt>bannerweb</dt>
 <dd>course schedules and class sizes from a recent semester</dd>
 
+<dt>tnr_highland (coming soon)</dt>
+<dd>logs from a local trap-and-release program serving feral cats in Shreveport: <a href="https://portcitycatrescue.org/local-tnr-programs/">portcitycatrescue.org/local-tnr-programs</a></dd>
+
 <dt>sneaux21 (coming soon)</dt>
 <dd>five years (2016-2021) of Shreveport's hourly weather data for the week of Feb. 12-18</dd>
 </dl>
